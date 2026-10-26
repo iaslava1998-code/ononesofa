@@ -9,6 +9,20 @@ export async function GET(request){
  const raw=(searchParams.get('q')||'').trim().slice(0,50);
  const term=map[raw.toLowerCase()]||raw||(type==='gif'?'reaction':'cute');
  const offset=Math.min(5000,Math.max(0,Number(searchParams.get('offset'))||0));
+ const giphyKey=process.env.GIPHY_API_KEY;
+ if(giphyKey){
+  try{
+   const url=new URL('https://api.giphy.com/v1/'+(type==='gif'?'gifs':'stickers')+'/'+(raw?'search':'trending'));
+   url.searchParams.set('api_key',giphyKey);url.searchParams.set('limit','30');url.searchParams.set('offset',String(offset));url.searchParams.set('rating','pg');if(raw)url.searchParams.set('q',term);
+   const res=await fetch(url,{signal:AbortSignal.timeout(10000),cache:'no-store'});
+   if(res.ok){
+    const d=await res.json();
+    const items=(d.data||[]).map(x=>({url:x.images?.fixed_height?.url||x.images?.original?.url,preview:x.images?.fixed_width_small?.url||x.images?.preview_gif?.url,title:x.title||term,source:x.url})).filter(x=>x.url&&x.url.startsWith('https://'));
+    const total=d.pagination?.total_count||0;
+    return NextResponse.json({items,nextOffset:offset+items.length<total?offset+items.length:null,provider:'GIPHY'},{headers:{'Cache-Control':'private, no-store'}});
+   }
+  }catch{}
+ }
  const query=type==='gif'?term+' animated gif':term+' (sticker OR emoji OR emoticon OR cartoon)';
  const params=new URLSearchParams({action:'query',generator:'search',gsrsearch:query,gsrnamespace:'6',gsrlimit:'50',gsroffset:String(offset),prop:'imageinfo',iiprop:'url|mime|size',format:'json',formatversion:'2'});
  try{
@@ -24,6 +38,6 @@ export async function GET(request){
    return[{url,title:p.title.replace(/^File:/,''),source:'https://commons.wikimedia.org/wiki/'+encodeURIComponent(p.title.replaceAll(' ','_'))}];
   });
   const nextOffset=data.continue?.gsroffset??null;
-  return NextResponse.json({items,nextOffset},{headers:{'Cache-Control':'private, no-store'}});
+  return NextResponse.json({items,nextOffset,provider:'Wikimedia Commons'},{headers:{'Cache-Control':'private, no-store'}});
  }catch{return NextResponse.json({items:[],nextOffset:null,error:'Сейчас не удалось загрузить изображения'},{status:502})}
 }
