@@ -157,3 +157,25 @@ body[data-daypart="night"]{background:linear-gradient(180deg,#060710c2,#090914e8
 header{background:linear-gradient(90deg,#16101bb8,#1b142154 70%,transparent);border-radius:0 0 25px 25px}
 main>.bar,.chat-shell,.modal{box-shadow:0 14px 42px #0009}
 @media(max-width:650px){body[data-daypart]{background-size:auto,auto 100vh!important;background-position:center,center top!important;background-attachment:scroll!important}}
+
+/* Tall illustrated cinema stories: new cartoon figures appear while scrolling. */
+body[data-daypart="morning"],body[data-daypart="day"],body[data-daypart="evening"]{
+background-image:linear-gradient(90deg,rgba(12,11,20,.29),rgba(12,11,20,.88) 24%,rgba(12,11,20,.9) 76%,rgba(12,11,20,.29)),url('/cinema-scroll-day.svg')!important;
+background-size:100% 100%,100% auto!important;
+background-position:center top!important;
+background-repeat:repeat-y!important;
+background-attachment:scroll!important;
+}
+body[data-daypart="night"]{
+background-image:linear-gradient(90deg,rgba(5,5,13,.35),rgba(5,5,13,.9) 24%,rgba(5,5,13,.92) 76%,rgba(5,5,13,.35)),url('/cinema-scroll-night.svg')!important;
+background-size:100% 100%,100% auto!important;
+background-position:center top!important;
+background-repeat:repeat-y!important;
+background-attachment:scroll!important;
+}
+body[data-daypart] main>.bar{background:#171622ed}
+body[data-daypart] .grid>div>.movie{background:#161824ee}
+@media(max-width:750px){
+body[data-daypart]{background-size:100% 100%,auto 2900px!important;background-position:center top!important}
+body[data-daypart] main{background:#0a0a1399;border-radius:18px}
+}
