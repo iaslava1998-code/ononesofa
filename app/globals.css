@@ -179,3 +179,25 @@ body[data-daypart] .grid>div>.movie{background:#161824ee}
 body[data-daypart]{background-size:100% 100%,auto 2900px!important;background-position:center top!important}
 body[data-daypart] main{background:#0a0a1399;border-radius:18px}
 }
+
+/* Subtle animated cinema ambience */
+body[data-daypart]{
+ --cinema-glow:#f5ad76;
+}
+body[data-daypart="night"]{--cinema-glow:#c46b9e}
+body[data-daypart]::before{
+ content:"";position:fixed;inset:-10%;pointer-events:none;z-index:-1;
+ background:radial-gradient(ellipse 42% 20% at 48% 12%,var(--cinema-glow),transparent 70%);
+ opacity:.10;filter:blur(40px);animation:cinema-light-pulse 9s ease-in-out infinite alternate;
+}
+body[data-daypart]::after{
+ content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;width:100%;height:100%;max-width:none;max-height:none;left:0;top:0;border-radius:0;filter:none;
+ background-image:radial-gradient(circle,#ffe7ba 1px,transparent 2px),radial-gradient(circle,#ffe2ae 1px,transparent 2px);
+ background-size:197px 211px,271px 293px;background-position:14px 8px,87px 132px;
+ opacity:.16;animation:cinema-floating-dust 32s linear infinite;
+}
+header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
+@keyframes cinema-light-pulse{0%{opacity:.045;transform:translateY(-2%) scale(.98)}100%{opacity:.15;transform:translateY(3%) scale(1.07)}}
+@keyframes cinema-floating-dust{0%{background-position:14px 8px,87px 132px}100%{background-position:44px -360px,117px -290px}}
+@keyframes cinema-projector{0%{opacity:.28;transform:translateY(-5px)}100%{opacity:.7;transform:translateY(8px)}}
+@media(prefers-reduced-motion:reduce){body[data-daypart]::before,body[data-daypart]::after,header::after{animation:none!important}}
