@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+/* Matrix-inspired chat only: keep the rest of the cinema unchanged */
+.chat-shell{background:linear-gradient(165deg,#07140ff4,#07100def 70%,#081813ed)!important;border:1px solid #2ebc6488!important;box-shadow:inset 0 0 45px #008c331a,0 18px 55px #0009!important;position:relative;overflow:hidden}
+.chat-shell::before{content:"0101010011010110011001010011010101010101100110101010";position:absolute;right:12px;top:0;width:90px;height:100%;overflow:hidden;word-break:break-all;line-height:1.5;font:18px 'Share Tech Mono',monospace;color:#28fc6145;writing-mode:vertical-rl;letter-spacing:9px;pointer-events:none;mask-image:linear-gradient(transparent,#000 22%,#000 80%,transparent)}
+.chat-shell .chat-head h2,.chat-shell .chat-by,.chat-shell .chat-body,.chat-shell .chat-compose input,.chat-shell .chat-who,.chat-shell .chat-empty{font-family:'Share Tech Mono',ui-monospace,monospace!important}
+.chat-shell .chat-head h2{color:#97ffb2!important;text-shadow:0 0 13px #38d65b83;letter-spacing:.045em!important}
+.chat-shell .chat-messages{background:#030b09ed!important;border:1px solid #215b398a!important;box-shadow:inset 0 0 22px #0009}
+.chat-shell .chat-message{background:#0a2117!important;border:1px solid #2b7e4b7b!important;color:#c9ffda!important;box-shadow:0 4px 15px #0006}
+.chat-shell .chat-message.mine{background:#123020!important;border-color:#47c47599!important}
+.chat-shell .chat-by{color:#62ee90!important}
+.chat-shell .chat-body{font-size:15px;line-height:1.55;overflow-wrap:anywhere}
+.chat-shell .chat-sticker{font-family:system-ui,sans-serif!important;font-size:72px!important;line-height:1.2;padding:7px 0;filter:drop-shadow(0 0 13px #3ffa6a80)}
+.chat-shell .chat-compose input{color:#e6ffee!important;background:#07150eff!important;border:1px solid #367f4f!important}
+.chat-extras{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0 8px}
+.chat-extras button{border:1px solid #478b5d;border-radius:10px;background:#0a2216;color:#9afaba;padding:8px 12px;cursor:pointer;font-weight:700}
+.chat-extras button.current,.chat-extras button:hover{background:#175c33;color:#eaffed}
+.chat-picker{display:flex;gap:5px;flex-wrap:wrap;padding:13px;margin:8px 0;border:1px solid #387f51;border-radius:13px;background:#05150ede}
+.chat-picker button{font-size:27px;padding:5px;border:0;background:transparent;cursor:pointer;border-radius:8px;transition:transform .15s,background .15s}
+.chat-picker button:hover{background:#18542d;transform:scale(1.15)}
+.chat-like{display:inline-flex;align-items:center;gap:5px;margin:8px 10px 0 0;border:1px solid #43865a;background:#10271b;border-radius:9px;color:#b9dec3;padding:5px 10px;cursor:pointer;font:700 14px 'Share Tech Mono',monospace}
+.chat-like.active{color:#ff9ba8;border-color:#fa859a;background:#42212b}
+.chat-like span{font-size:12px}
+@media(max-width:600px){.chat-shell .chat-sticker{font-size:56px!important}.chat-picker button{font-size:25px}.chat-shell::before{opacity:.35}}
