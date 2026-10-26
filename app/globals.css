@@ -101,3 +101,10 @@ header>.eyebrow,header>.subtitle{position:relative;z-index:1}
 @keyframes sofa-ambient{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(13vw,-7vh,0) scale(1.18)}}
 @media(max-width:650px){body{background-attachment:scroll}body:after{opacity:.5}header{min-height:0}}
 @media(prefers-reduced-motion:reduce){body:after{animation:none}}
+
+.trailer-section{margin-top:16px;margin-bottom:10px}
+.trailer-button{background:#372e3a;border:1px solid #f3bd8a70;color:#ffe0b8}
+.trailer-overlay{position:fixed;inset:0;z-index:70;background:#050509ef;display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(8px)}
+.trailer-frame{width:min(94vw,960px);aspect-ratio:16/9;position:relative;background:#050505;box-shadow:0 25px 80px #000c;border-radius:14px}
+.trailer-frame iframe{width:100%;height:100%;border:0;border-radius:14px}
+.trailer-close{position:absolute;right:0;top:-48px;height:39px;width:39px;border:1px solid #ffffff66;border-radius:50%;background:#292433;color:white;font-size:28px}
