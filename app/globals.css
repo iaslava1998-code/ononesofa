@@ -83,3 +83,21 @@ footer{border-top:1px solid #ffffff10;font-size:13px}
 @media(prefers-reduced-motion:reduce){.magic-overlay{animation:none;opacity:1}.magic-stars span,.magic-title,.magic-symbol,.magic-subtitle{animation:none}}
 
 .chat-delete{display:block;margin:7px 0 0 auto;padding:3px 0;border:0;background:transparent;color:#e6aaa8;font-size:11px;opacity:.8;cursor:pointer}.chat-delete:hover{color:#ffcac5;opacity:1;text-decoration:underline}
+
+/* Cinematic ambient backdrop: no images or external resources */
+html{background:#090b13}
+body{isolation:isolate;background:
+ radial-gradient(ellipse 42% 28% at 10% 7%,rgba(147,73,94,.23),transparent 95%),
+ radial-gradient(ellipse 35% 35% at 92% 27%,rgba(79,67,137,.23),transparent 90%),
+ radial-gradient(ellipse 45% 28% at 50% 72%,rgba(108,48,78,.17),transparent 92%),
+ linear-gradient(165deg,#151321 0%,#0c101a 36%,#11101a 72%,#090c13 100%);background-attachment:fixed}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+ repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 4px,transparent 5px),
+ radial-gradient(ellipse 50% 35% at 50% -12%,rgba(242,180,130,.10),transparent 90%);opacity:.55}
+body:after{content:"";position:fixed;left:-20vw;top:34vh;width:70vw;height:70vw;max-width:850px;max-height:850px;z-index:-1;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(152,81,103,.085),transparent 68%);filter:blur(26px);animation:sofa-ambient 22s ease-in-out infinite alternate}
+header{min-height:220px}
+header:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,transparent 30%,rgba(248,187,138,.04) 55%,transparent 83%)}
+header>.eyebrow,header>.subtitle{position:relative;z-index:1}
+@keyframes sofa-ambient{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(13vw,-7vh,0) scale(1.18)}}
+@media(max-width:650px){body{background-attachment:scroll}body:after{opacity:.5}header{min-height:0}}
+@media(prefers-reduced-motion:reduce){body:after{animation:none}}
