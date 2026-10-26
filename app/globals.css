@@ -81,3 +81,5 @@ footer{border-top:1px solid #ffffff10;font-size:13px}
 @keyframes magic-twinkle{from{opacity:.25;transform:scale(.7) rotate(-15deg)}to{opacity:1;transform:scale(1.35) rotate(15deg)}}
 @media(max-width:650px){.chat-shell{margin-top:50px;padding:16px;border-radius:19px}.chat-head{display:block}.chat-live{display:inline-block;margin-bottom:12px}.chat-messages{height:320px;padding:12px}.chat-message{max-width:94%}.chat-compose{flex-direction:column}.chat-compose .action{align-self:flex-end}.comment-compose{flex-direction:column}.comment-compose .action{align-self:flex-end}}
 @media(prefers-reduced-motion:reduce){.magic-overlay{animation:none;opacity:1}.magic-stars span,.magic-title,.magic-symbol,.magic-subtitle{animation:none}}
+
+.chat-delete{display:block;margin:7px 0 0 auto;padding:3px 0;border:0;background:transparent;color:#e6aaa8;font-size:11px;opacity:.8;cursor:pointer}.chat-delete:hover{color:#ffcac5;opacity:1;text-decoration:underline}
