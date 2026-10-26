@@ -136,3 +136,13 @@ body[data-daypart="night"]{
  background:linear-gradient(90deg,rgba(6,7,17,.30),rgba(6,7,17,.76) 24%,rgba(6,7,17,.79) 76%,rgba(6,7,17,.30)),url('/cinema-final-night.webp') center center/cover fixed no-repeat!important;
 }
 @media(max-width:700px){body[data-daypart]{background-size:100% 100%,auto 100vh!important;background-position:center,center center!important;background-attachment:scroll,fixed!important}}
+
+/* Guaranteed visible image layer, independent of old body background rules */
+body{background:#100e17!important;isolation:isolate}
+.cinema-wallpaper{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(90deg,rgba(7,6,13,.15),rgba(9,8,16,.47) 37%,rgba(9,8,16,.47) 63%,rgba(7,6,13,.15)),url('/cinema-final-day.webp');background-repeat:no-repeat;background-position:center;background-size:100% 100%,cover}
+body[data-daypart="night"] .cinema-wallpaper{background-image:linear-gradient(90deg,rgba(4,5,11,.22),rgba(5,6,14,.50) 37%,rgba(5,6,14,.50) 63%,rgba(4,5,11,.22)),url('/cinema-final-night.webp')}
+header,main,footer{position:relative;z-index:1}
+main::before{background:linear-gradient(180deg,rgba(9,10,20,.28),rgba(9,10,20,.53))!important}
+body[data-daypart] main{background:transparent!important}
+.season-atmosphere{position:fixed;z-index:8;pointer-events:none}
+@media(max-width:700px){.cinema-wallpaper{background-position:center,center;background-size:100% 100%,auto 100vh}main::before{background:rgba(8,9,18,.52)!important}}
