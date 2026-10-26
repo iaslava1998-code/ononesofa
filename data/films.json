@@ -5,7 +5,8 @@
     "year": 2026,
     "poster": null,
     "slava": 5,
-    "veronika": 3
+    "veronika": 3,
+    "overview": "Продолжение истории о выживании на экстремальной высоте. Подробности сюжета пока уточняются."
   },
   {
     "id": "seed-1",
@@ -13,7 +14,8 @@
     "year": 2014,
     "poster": "https://image.tmdb.org/t/p/original/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
     "slava": 7.5,
-    "veronika": 7
+    "veronika": 7,
+    "overview": "Консьерж роскошного европейского отеля и его молодой помощник оказываются втянуты в историю с наследством, украденной картиной и погонями."
   },
   {
     "id": "seed-2",
@@ -21,7 +23,8 @@
     "year": 2023,
     "poster": null,
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Уточним оригинальное название фильма, чтобы добавить достоверное описание без путаницы с одноимёнными картинами."
   },
   {
     "id": "seed-3",
@@ -29,7 +32,8 @@
     "year": 2013,
     "poster": "https://image.tmdb.org/t/p/original/nwJbVKauPDgJVQgT7SQpVTVN4gA.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "В Нью-Йорке эпохи джаза загадочный миллионер устраивает роскошные вечеринки, надеясь вернуть любовь из прошлого."
   },
   {
     "id": "seed-4",
@@ -37,7 +41,8 @@
     "year": 2012,
     "poster": "https://image.tmdb.org/t/p/original/ajupvnIITUqymYcEIvBFj261Pk2.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "После смерти матери женщина возвращается в родной дом и сталкивается с пугающими событиями, связанными с семейными тайнами."
   },
   {
     "id": "seed-5",
@@ -45,7 +50,8 @@
     "year": 2016,
     "poster": "https://image.tmdb.org/t/p/original/91wViefXYoQdN2GNoIOit2NXxfm.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Няня приезжает в старинный особняк и обнаруживает, что ей поручено присматривать не за ребёнком, а за фарфоровой куклой, к которой хозяева относятся как к живой."
   },
   {
     "id": "seed-6",
@@ -53,7 +59,8 @@
     "year": 2018,
     "poster": "https://image.tmdb.org/t/p/original/xuwpJbiLOsnSJnN4Ec7Ubzsg8iI.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Молодая женщина знакомится с одинокой вдовой, но их дружба постепенно превращается в опасную психологическую игру."
   },
   {
     "id": "seed-7",
@@ -61,7 +68,8 @@
     "year": 2018,
     "poster": "https://image.tmdb.org/t/p/original/cF8fsHKGfqdlm7kdmG2Dub4E2rg.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "После жестокого нападения парализованному мужчине предлагают экспериментальный имплант, который возвращает ему подвижность и необычные возможности."
   },
   {
     "id": "seed-8",
@@ -69,7 +77,8 @@
     "year": 2020,
     "poster": "https://image.tmdb.org/t/p/original/ilHG4EayOVoYeKqslspY3pR4wzC.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Девушка, выросшая под постоянным контролем матери, начинает подозревать, что от неё скрывают страшную правду."
   },
   {
     "id": "seed-9",
@@ -77,7 +86,8 @@
     "year": 2018,
     "poster": "https://image.tmdb.org/t/p/original/sPALZcJbUZbImHW5aAGXhNZtg7w.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Команда авторов интернет-шоу отправляется в заброшенную психиатрическую больницу ради прямого эфира, но происходящее быстро выходит из-под контроля."
   },
   {
     "id": "seed-10",
@@ -85,7 +95,8 @@
     "year": 2026,
     "poster": null,
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "История по мотивам древнегреческого эпоса о долгом возвращении Одиссея домой после Троянской войны."
   },
   {
     "id": "seed-11",
@@ -93,7 +104,8 @@
     "year": 2016,
     "poster": null,
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Семеро друзей за ужином решают вслух читать сообщения и отвечать на звонки по громкой связи. Игра раскрывает скрытые стороны их жизни."
   },
   {
     "id": "seed-12",
@@ -101,7 +113,8 @@
     "year": 2010,
     "poster": "https://image.tmdb.org/t/p/original/rDU8z9zCAxNU4gFYLS9Mu8fwx2m.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Молодой человек, переживающий семейную трагедию, знакомится с девушкой, чья жизнь тоже отмечена потерей."
   },
   {
     "id": "seed-13",
@@ -109,7 +122,8 @@
     "year": 2026,
     "poster": null,
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Уточним оригинальное название фильма, чтобы не подменить его сюжетом другой картины."
   },
   {
     "id": "seed-14",
@@ -117,7 +131,8 @@
     "year": 2017,
     "poster": "https://image.tmdb.org/t/p/original/1c00RZVJYtKkpyAvd87tYKz4vBp.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Мать погибшей девушки арендует три рекламных щита с обращением к полиции, требуя расследовать убийство дочери."
   },
   {
     "id": "seed-15",
@@ -125,7 +140,8 @@
     "year": 2017,
     "poster": "https://image.tmdb.org/t/p/original/ckDGqK7vsTsOIl0jhmI9Q4YIxk.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "После похищения старший брат возвращается домой, но младший замечает странности в его поведении и начинает собственное расследование."
   },
   {
     "id": "seed-16",
@@ -133,7 +149,8 @@
     "year": 2022,
     "poster": null,
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Семья принимает приглашение новых знакомых провести выходные в загородном доме. Вежливость постепенно сменяется тревогой."
   },
   {
     "id": "seed-17",
@@ -141,7 +158,8 @@
     "year": 2007,
     "poster": "https://image.tmdb.org/t/p/original/9atJUCLJcW8CSFbFgz9S9jc47WN.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Подросток, находящийся под домашним арестом, наблюдает за соседями и начинает подозревать одного из них в убийстве."
   },
   {
     "id": "seed-18",
@@ -149,7 +167,8 @@
     "year": 2018,
     "poster": null,
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Серийный убийца рассказывает о совершённых преступлениях, представляя их как этапы собственного жуткого «творчества»."
   },
   {
     "id": "seed-19",
@@ -157,7 +176,8 @@
     "year": 2016,
     "poster": null,
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Бизнесмен, обвиняемый в убийстве любовницы, вместе с адвокатом пытается восстановить события роковой ночи."
   },
   {
     "id": "seed-20",
@@ -165,7 +185,8 @@
     "year": 1994,
     "poster": "https://image.tmdb.org/t/p/original/x1QZHSq9AzreIVbsp8VgYemAjV0.jpg",
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Переплетающиеся истории двух наёмников, боксёра, жены криминального авторитета и мелких грабителей в Лос-Анджелесе."
   },
   {
     "id": "seed-21",
@@ -173,6 +194,7 @@
     "year": 1994,
     "poster": null,
     "slava": null,
-    "veronika": null
+    "veronika": null,
+    "overview": "Банкира приговаривают к пожизненному заключению за убийство. В тюрьме он заводит дружбу и годами не теряет надежды на свободу."
   }
 ]
