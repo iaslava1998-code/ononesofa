@@ -14,3 +14,32 @@ body[data-season="autumn"] header{box-shadow:0 25px 60px #0009,0 0 40px #e49a562
 body[data-daypart] {background-image:linear-gradient(90deg,#0a0816a1,#111019ba 24%,#111019bd 76%,#0a0816a1),url('/cinema-scroll-day.svg')!important}
 body[data-daypart="night"]{background-image:linear-gradient(90deg,#060612a1,#090814c2 24%,#090814c2 76%,#060612a1),url('/cinema-scroll-night.svg')!important}
 @media(max-width:700px){header{min-height:280px!important;margin:10px 12px 18px!important;padding:38px 22px 25px!important;border-radius:20px!important;background-position:59% center!important}header h1{max-width:340px}header .subtitle{max-width:260px}header .eyebrow{max-width:280px}body[data-daypart="night"] header{background-position:59% center!important}}
+
+/* Final illustrated background: actual generated artwork, not temporary SVG figures */
+body[data-daypart="morning"],body[data-daypart="day"],body[data-daypart="evening"]{
+ background-image:linear-gradient(90deg,#110d1bcc 0%,#120e1dd9 25%,#120e1ddd 75%,#110d1bc6 100%),url('/cinema-day.webp')!important;
+ background-position:center top!important;
+ background-size:100% 100%,cover!important;
+ background-attachment:scroll,fixed!important;
+ background-repeat:no-repeat!important;
+}
+body[data-daypart="night"]{
+ background-image:linear-gradient(90deg,#080714da 0%,#090a17e8 25%,#090a17e8 75%,#080714db 100%),url('/cinema-night.webp')!important;
+ background-position:center top!important;
+ background-size:100% 100%,cover!important;
+ background-attachment:scroll,fixed!important;
+ background-repeat:no-repeat!important;
+}
+header{
+ background:linear-gradient(90deg,#0e091ce8 0%,#0e091cbb 40%,#0e091c30 82%),url('/cinema-day.webp') center 29% / cover no-repeat!important;
+}
+body[data-daypart="night"] header{
+ background:linear-gradient(90deg,#070914eb 0%,#070914c6 44%,#07091444 85%),url('/cinema-night.webp') center 32% / cover no-repeat!important;
+}
+body[data-season="winter"] header{filter:saturate(.8)}
+body[data-season="summer"] header{filter:saturate(1.13)}
+body[data-season="autumn"] header{filter:sepia(.07)}
+@media(max-width:700px){
+ body[data-daypart]{background-size:100% 100%,auto 100vh!important;background-attachment:scroll!important}
+ header{background-position:63% 40%!important}
+}
