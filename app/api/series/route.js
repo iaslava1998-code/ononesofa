@@ -2,7 +2,8 @@ import {NextResponse} from 'next/server';
 import {db} from '../../../lib/server';
 import {authenticated} from '../../../lib/auth';
 const fail=(message,status)=>NextResponse.json({error:message},{status});
-export async function GET(){
+export async function GET(request){
+ if(!authenticated(request))return fail('Unauthorized',401);
  const c=db();if(!c)return fail('Database not configured',503);
  const {data,error}=await c.from('series').select('*').order('created_at',{ascending:true});
  return error?fail('Series unavailable',503):NextResponse.json({series:data||[]});
