@@ -127,3 +127,12 @@ h2,.film-meta strong,.pill,.catalog-switch button{font-family:'Golos Text',syste
 header .eyebrow{font-family:'Golos Text',system-ui,sans-serif!important;font-weight:800!important;letter-spacing:.16em!important}
 header .subtitle{font-family:'Golos Text',system-ui,sans-serif!important;font-weight:500!important}
 @media(max-width:650px){header h1{font-size:clamp(26px,6.7vw,36px)!important}}
+
+/* Current full-page cinema artwork: latest illustrated scenes */
+body[data-daypart="morning"],body[data-daypart="day"],body[data-daypart="evening"]{
+ background:linear-gradient(90deg,rgba(10,8,14,.24),rgba(9,8,17,.70) 24%,rgba(9,8,17,.74) 76%,rgba(10,8,14,.24)),url('/cinema-final-day.webp') center center/cover fixed no-repeat!important;
+}
+body[data-daypart="night"]{
+ background:linear-gradient(90deg,rgba(6,7,17,.30),rgba(6,7,17,.76) 24%,rgba(6,7,17,.79) 76%,rgba(6,7,17,.30)),url('/cinema-final-night.webp') center center/cover fixed no-repeat!important;
+}
+@media(max-width:700px){body[data-daypart]{background-size:100% 100%,auto 100vh!important;background-position:center,center center!important;background-attachment:scroll,fixed!important}}
