@@ -37,3 +37,5 @@
 @media(max-width:540px){.chat-media-results{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}}
 
 .chat-emotion-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}.chat-emotion-tags button{font-size:12px;color:#b9f9ca;background:#123c24;border:1px solid #3f975b;border-radius:100px;padding:6px 9px;cursor:pointer}.chat-emotion-tags button:hover{background:#24643b}
+
+.chat-media-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0 0 14px}.chat-media-tabs button{padding:11px 9px;border:1px solid #387b50;border-radius:11px;background:#092518;color:#abeec0;font-weight:800;cursor:pointer}.chat-media-tabs button.current{color:#072113;background:linear-gradient(120deg,#82feb0,#b1ffd5);box-shadow:0 0 18px #61f09234}.chat-media-picker{max-width:630px}.chat-media-results button{position:relative}.chat-media-results button:focus-visible{outline:2px solid #c7ffd9;outline-offset:2px}
