@@ -1,0 +1,178 @@
+[
+  {
+    "id": "seed-0",
+    "title": "Вышка 2",
+    "year": 2026,
+    "poster": null,
+    "slava": 5,
+    "veronika": 3
+  },
+  {
+    "id": "seed-1",
+    "title": "Отель «Гранд Будапешт»",
+    "year": 2014,
+    "poster": "https://image.tmdb.org/t/p/original/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg",
+    "slava": 7.5,
+    "veronika": 7
+  },
+  {
+    "id": "seed-2",
+    "title": "Зрение",
+    "year": 2023,
+    "poster": null,
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-3",
+    "title": "Великий Гэтсби",
+    "year": 2013,
+    "poster": "https://image.tmdb.org/t/p/original/nwJbVKauPDgJVQgT7SQpVTVN4gA.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-4",
+    "title": "Пакт",
+    "year": 2012,
+    "poster": "https://image.tmdb.org/t/p/original/ajupvnIITUqymYcEIvBFj261Pk2.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-5",
+    "title": "Кукла",
+    "year": 2016,
+    "poster": "https://image.tmdb.org/t/p/original/91wViefXYoQdN2GNoIOit2NXxfm.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-6",
+    "title": "В объятиях лжи",
+    "year": 2018,
+    "poster": "https://image.tmdb.org/t/p/original/xuwpJbiLOsnSJnN4Ec7Ubzsg8iI.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-7",
+    "title": "Апгрейд",
+    "year": 2018,
+    "poster": "https://image.tmdb.org/t/p/original/cF8fsHKGfqdlm7kdmG2Dub4E2rg.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-8",
+    "title": "Взаперти",
+    "year": 2020,
+    "poster": "https://image.tmdb.org/t/p/original/ilHG4EayOVoYeKqslspY3pR4wzC.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-9",
+    "title": "Гончиам: Психиатрическая больница",
+    "year": 2018,
+    "poster": "https://image.tmdb.org/t/p/original/sPALZcJbUZbImHW5aAGXhNZtg7w.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-10",
+    "title": "Одиссея",
+    "year": 2026,
+    "poster": null,
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-11",
+    "title": "Идеальные незнакомцы",
+    "year": 2016,
+    "poster": null,
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-12",
+    "title": "Помни меня",
+    "year": 2010,
+    "poster": "https://image.tmdb.org/t/p/original/rDU8z9zCAxNU4gFYLS9Mu8fwx2m.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-13",
+    "title": "Другая мамочка",
+    "year": 2026,
+    "poster": null,
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-14",
+    "title": "Три билборда на границе Эббинга, Миссури",
+    "year": 2017,
+    "poster": "https://image.tmdb.org/t/p/original/1c00RZVJYtKkpyAvd87tYKz4vBp.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-15",
+    "title": "Забытый",
+    "year": 2017,
+    "poster": "https://image.tmdb.org/t/p/original/ckDGqK7vsTsOIl0jhmI9Q4YIxk.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-16",
+    "title": "Не говори никому",
+    "year": 2022,
+    "poster": null,
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-17",
+    "title": "Паранойя",
+    "year": 2007,
+    "poster": "https://image.tmdb.org/t/p/original/9atJUCLJcW8CSFbFgz9S9jc47WN.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-18",
+    "title": "Дом, который построил Джек",
+    "year": 2018,
+    "poster": null,
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-19",
+    "title": "Невидимый гость",
+    "year": 2016,
+    "poster": null,
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-20",
+    "title": "Криминальное чтиво",
+    "year": 1994,
+    "poster": "https://image.tmdb.org/t/p/original/x1QZHSq9AzreIVbsp8VgYemAjV0.jpg",
+    "slava": null,
+    "veronika": null
+  },
+  {
+    "id": "seed-21",
+    "title": "Побег из Шоушенка",
+    "year": 1994,
+    "poster": null,
+    "slava": null,
+    "veronika": null
+  }
+]
