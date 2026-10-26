@@ -131,3 +131,22 @@ body[data-daypart="day"]{background:radial-gradient(ellipse 60% 55% at 80% 0%,rg
 body[data-daypart="evening"]{background:radial-gradient(ellipse 60% 40% at 85% 0%,rgba(195,92,90,.24),transparent 94%),radial-gradient(ellipse 48% 60% at 5% 46%,rgba(124,70,128,.20),transparent 95%),linear-gradient(160deg,#271d2c,#161624 55%,#0c0d18)}
 body[data-daypart="night"]{background:radial-gradient(ellipse 50% 44% at 85% 3%,rgba(65,58,115,.21),transparent 95%),radial-gradient(ellipse 55% 60% at 0% 75%,rgba(65,35,92,.15),transparent 93%),linear-gradient(160deg,#111321,#0c0e19 55%,#080a11)}
 @media(prefers-reduced-motion:reduce){body[data-daypart]{transition:none}}
+
+/* Cinema-poster cards and combined review medallions */
+.grid>div>.movie{position:relative;display:flex;flex-direction:column;border-radius:18px;border:1px solid rgba(233,187,139,.32);box-shadow:0 12px 35px #0005,0 0 0 1px #f1bf8310,inset 0 1px #ffffff18;overflow:hidden}
+.poster-frame{position:relative;width:100%;aspect-ratio:2/3;overflow:hidden;background:radial-gradient(circle at 50% 35%,#4d3a4d,#171822 76%)}
+.poster-frame:after{content:"";position:absolute;inset:45% 0 0;pointer-events:none;background:linear-gradient(180deg,transparent,#120f1b77)}
+.grid .poster-frame .poster{width:100%;height:100%;aspect-ratio:auto;object-fit:cover;border-radius:0;transition:transform .35s ease,filter .35s ease}
+.grid .movie:hover .poster{transform:scale(1.045)}
+.film-ribbon{position:absolute;z-index:1;bottom:12px;left:10px;display:inline-block;padding:5px 10px;border:1px solid #ffdfaf55;border-radius:100px;background:#131520c9;backdrop-filter:blur(10px);color:#f9dab5;font-size:11px;font-weight:650;letter-spacing:.015em}
+.shared-rating{position:absolute;z-index:2;right:9px;bottom:8px;width:57px;height:57px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid #ffd9a1;border-radius:50%;background:radial-gradient(circle at 35% 20%,#564438,#1e1a22 80%);box-shadow:0 4px 20px #0009,0 0 16px #e9a87044;color:#fff2d9;font-variant-numeric:tabular-nums}
+.shared-rating b{font-size:19px;line-height:1;font-weight:750}
+.shared-rating small{font-size:10px!important;line-height:1;margin:3px 0 0!important;color:#ffd8a7!important}
+.film-meta{flex:1;display:flex;flex-direction:column;padding:11px 12px 13px;background:linear-gradient(160deg,#282634,#1b1b28)}
+.grid .film-meta strong{margin:0 0 6px;font-weight:650}
+.grid .film-meta small{margin:auto 0 0;color:#beb5bd}
+body[data-daypart="morning"] .grid>div>.movie,body[data-daypart="day"] .grid>div>.movie{border-color:#efd1a570;box-shadow:0 15px 30px #0004,0 0 23px #edbb8a15}
+body[data-daypart="evening"] .grid>div>.movie{border-color:#d89b9870;box-shadow:0 16px 34px #0007,0 0 20px #a85b8533}
+body[data-daypart="night"] .grid>div>.movie{border-color:#8680b176;box-shadow:0 15px 37px #0009,0 0 18px #786bad26}
+body[data-daypart="night"] .shared-rating{border-color:#c8b9f4;background:radial-gradient(circle at 35% 15%,#48415e,#171621 85%);color:#f1e7ff;box-shadow:0 4px 20px #000a,0 0 16px #a89cdb52}
+@media(max-width:650px){.shared-rating{width:47px;height:47px;right:7px;bottom:7px}.shared-rating b{font-size:16px}.film-ribbon{bottom:9px;left:7px;padding:4px 7px;font-size:10px}.film-meta{padding:10px 9px 12px}}
