@@ -9,7 +9,7 @@ export async function GET(request){
  const raw=(searchParams.get('q')||'').trim().slice(0,50);
  const term=map[raw.toLowerCase()]||raw||(type==='gif'?'reaction':'cute');
  const offset=Math.min(5000,Math.max(0,Number(searchParams.get('offset'))||0));
- const query=type==='gif'?term+' animated gif':term+' sticker png';
+ const query=type==='gif'?term+' animated gif':term+' (sticker OR emoji OR emoticon OR cartoon)';
  const params=new URLSearchParams({action:'query',generator:'search',gsrsearch:query,gsrnamespace:'6',gsrlimit:'50',gsroffset:String(offset),prop:'imageinfo',iiprop:'url|mime|size',format:'json',formatversion:'2'});
  try{
   const response=await fetch('https://commons.wikimedia.org/w/api.php?'+params,{headers:{'User-Agent':'OnOneSofa/1.0 cinema chat media search'},signal:AbortSignal.timeout(10000),cache:'no-store'});
@@ -20,7 +20,7 @@ export async function GET(request){
    const url=i.url||'';
    if(!url.startsWith('https://upload.wikimedia.org/'))return[];
    if(type==='gif'&&i.mime!=='image/gif')return[];
-   if(type==='sticker'&&!['image/png','image/webp','image/gif'].includes(i.mime))return[];
+   if(type==='sticker'&&!['image/png','image/webp','image/gif','image/svg+xml'].includes(i.mime))return[];
    return[{url,title:p.title.replace(/^File:/,''),source:'https://commons.wikimedia.org/wiki/'+encodeURIComponent(p.title.replaceAll(' ','_'))}];
   });
   const nextOffset=data.continue?.gsroffset??null;
