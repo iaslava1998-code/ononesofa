@@ -43,3 +43,21 @@ body[data-season="autumn"] header{filter:sepia(.07)}
  body[data-daypart]{background-size:100% 100%,auto 100vh!important;background-attachment:scroll!important}
  header{background-position:63% 40%!important}
 }
+
+/* Cinematic typography and paired hero illustrations */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800;900&display=swap');
+body{font-family:'Manrope',system-ui,sans-serif}
+h1,h2,.film-meta strong,.pill{font-family:'Unbounded','Manrope',system-ui,sans-serif}
+header{position:relative;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;min-height:510px!important;padding:29px 26px 20px!important;margin:18px auto 28px!important;background:linear-gradient(180deg,#0c0917dd 0%,#0c091758 25%,transparent 46%,#0b0b1baf 100%),url('/cinema-hero-day-v2.webp') center 42%/cover no-repeat!important;border:1px solid #efb17c6e;border-radius:32px!important;box-shadow:0 30px 75px #0009,inset 0 0 60px #0003}
+body[data-daypart="night"] header{background:linear-gradient(180deg,#070714e8 0%,#0d0d254e 28%,transparent 52%,#070814a5 100%),url('/cinema-hero-night-v2.webp') center 42%/cover no-repeat!important;border-color:#a77aa276}
+header h1{font-family:'Unbounded','Manrope',sans-serif;font-size:clamp(30px,4.6vw,68px)!important;line-height:1.15;letter-spacing:-.045em;max-width:100%!important;margin:5px auto 12px!important;color:#fff3d8;text-shadow:0 2px 0 #935669,0 4px 0 #482d47,0 7px 1px #211429,0 11px 22px #000b,0 0 29px #eaa26b7a}
+header .eyebrow{padding:7px 15px;border:1px solid #fff8;background:#261c28aa;border-radius:999px;backdrop-filter:blur(7px);font-family:'Manrope',sans-serif;font-size:12px!important;letter-spacing:.19em;text-transform:uppercase;color:#ffe2b8}
+header .subtitle{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);max-width:min(90%,680px)!important;width:max-content;padding:10px 20px;margin:0!important;border-radius:99px;background:#090c1cba;border:1px solid #e9ba985a;color:#ffe7d8;font-weight:700;font-size:14px;backdrop-filter:blur(12px);text-shadow:0 2px 6px #000}
+h2{font-size:clamp(18px,2.5vw,25px);letter-spacing:-.045em}
+.film-meta strong{font-size:12px!important;line-height:1.5!important;letter-spacing:-.025em}
+.pill{font-size:12px!important;letter-spacing:-.03em}
+body[data-daypart="morning"],body[data-daypart="day"],body[data-daypart="evening"]{background-image:linear-gradient(90deg,#0c0b15c7,#13111bd1 28%,#13111bd1 72%,#0c0b15c7),url('/cinema-hero-day-v2.webp')!important;background-size:100% 100%,cover!important;background-attachment:scroll,fixed!important}
+body[data-daypart="night"]{background-image:linear-gradient(90deg,#090913d7,#0c0b17e5 28%,#0c0b17e5 72%,#090913d7),url('/cinema-hero-night-v2.webp')!important;background-size:100% 100%,cover!important;background-attachment:scroll,fixed!important}
+.season-atmosphere{z-index:8!important}
+.season-atmosphere span{filter:drop-shadow(0 0 3px #fff8)}
+@media(max-width:700px){header{height:410px;min-height:410px!important;padding:23px 12px!important;background-position:center 45%!important}body[data-daypart="night"] header{background-position:center 45%!important}header h1{font-size:clamp(24px,7vw,42px)!important}header .subtitle{bottom:12px;width:calc(100% - 25px);font-size:11px!important;white-space:normal}header .eyebrow{font-size:10px!important}.film-meta strong{font-size:11px!important}}
