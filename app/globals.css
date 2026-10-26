@@ -108,3 +108,26 @@ header>.eyebrow,header>.subtitle{position:relative;z-index:1}
 .trailer-frame{width:min(94vw,960px);aspect-ratio:16/9;position:relative;background:#050505;box-shadow:0 25px 80px #000c;border-radius:14px}
 .trailer-frame iframe{width:100%;height:100%;border:0;border-radius:14px}
 .trailer-close{position:absolute;right:0;top:-48px;height:39px;width:39px;border:1px solid #ffffff66;border-radius:50%;background:#292433;color:white;font-size:28px}
+
+/* Clear navigation and responsive controls */
+.main-toolbar{position:sticky;top:10px;z-index:5;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.film-tabs{display:flex;gap:7px;flex-wrap:wrap}
+.film-tabs .pill{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.tab-count{font-size:12px;font-weight:700;background:#ffffff1c;border-radius:50px;padding:3px 8px}
+.pill.active .tab-count{background:#3f2d2624}
+.film-search{display:flex;position:relative;flex:1;min-width:185px}
+.film-search .search{width:100%;min-width:0;padding-right:44px;order:initial}
+.search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:50%;background:#ffffff20;color:white;font-size:22px}
+.chat-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;white-space:nowrap}
+.empty-state{text-align:center;padding:44px 20px;background:#ffffff08;border:1px dashed #ffffff35;border-radius:18px;color:var(--muted)}
+.empty-state .action{margin-top:8px}
+.film-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.delete-film{background:transparent!important;border-color:#985c63!important;color:#efb4b4!important}
+@media(max-width:650px){.main-toolbar{top:0;margin-left:-7px;margin-right:-7px;padding:10px!important;gap:10px}.film-tabs{width:100%;display:grid;grid-template-columns:1fr 1fr}.film-tabs .pill{justify-content:center;font-size:12px;padding:9px 5px;white-space:normal}.film-search{flex:1 1 100%;order:1}.main-toolbar .add-film{flex:1}.main-toolbar .chat-link{flex:0 0 auto}.film-actions{display:grid;grid-template-columns:1fr}.film-actions .action{width:100%}}
+/* Automatic local time-of-day ambience; content always remains dark and legible */
+body[data-daypart]{transition:background 1.5s ease}
+body[data-daypart="morning"]{background:radial-gradient(ellipse 55% 40% at 5% 0%,rgba(238,153,126,.25),transparent 95%),radial-gradient(ellipse 40% 50% at 90% 25%,rgba(125,89,150,.22),transparent 95%),linear-gradient(165deg,#282131,#171727 50%,#0c101a)}
+body[data-daypart="day"]{background:radial-gradient(ellipse 60% 55% at 80% 0%,rgba(115,126,164,.22),transparent 95%),radial-gradient(ellipse 50% 55% at 0% 55%,rgba(84,96,142,.16),transparent 92%),linear-gradient(160deg,#1b2331,#111827 50%,#0b111a)}
+body[data-daypart="evening"]{background:radial-gradient(ellipse 60% 40% at 85% 0%,rgba(195,92,90,.24),transparent 94%),radial-gradient(ellipse 48% 60% at 5% 46%,rgba(124,70,128,.20),transparent 95%),linear-gradient(160deg,#271d2c,#161624 55%,#0c0d18)}
+body[data-daypart="night"]{background:radial-gradient(ellipse 50% 44% at 85% 3%,rgba(65,58,115,.21),transparent 95%),radial-gradient(ellipse 55% 60% at 0% 75%,rgba(65,35,92,.15),transparent 93%),linear-gradient(160deg,#111321,#0c0e19 55%,#080a11)}
+@media(prefers-reduced-motion:reduce){body[data-daypart]{transition:none}}
