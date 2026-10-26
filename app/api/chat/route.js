@@ -23,3 +23,12 @@ export async function POST(request){
  if(error)return NextResponse.json({error:'Could not send'},{status:500});
  return NextResponse.json({message:data},{status:201});
 }
+
+export async function DELETE(request){
+ if(!authenticated(request))return NextResponse.json({error:'Unauthorized'},{status:401});
+ const payload=await request.json().catch(()=>({}));
+ if(!Number.isSafeInteger(payload.id)||payload.id<=0)return NextResponse.json({error:'Invalid message'},{status:400});
+ const client=db();if(!client)return NextResponse.json({error:'Database unavailable'},{status:503});
+ const {error}=await client.from('chat_messages').delete().eq('id',payload.id);
+ return error?NextResponse.json({error:'Could not delete'},{status:500}):NextResponse.json({ok:true});
+}
