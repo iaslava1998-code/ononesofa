@@ -1,0 +1,37 @@
+/* Secret cinema entrance: separate from the protected catalogue */
+.gate-main{max-width:100%!important;min-height:calc(100svh - 166px);display:flex;align-items:center;justify-content:center;padding:24px 18px 9vh!important;background:none!important}
+.gate-main::before{display:none!important}
+.magic-gate{position:relative;isolation:isolate;overflow:hidden;width:min(100%,460px);padding:42px clamp(20px,5vw,45px) 43px;border-radius:31px;text-align:center;border:1px solid #f8d8ad75;background:linear-gradient(145deg,#252035eb,#141424ed 75%);box-shadow:0 26px 85px #000b,0 0 50px #eaa66d23,inset 0 1px #fff5;backdrop-filter:blur(22px)}
+.magic-gate::before{content:"";position:absolute;inset:-70% -20%;pointer-events:none;z-index:-1;background:conic-gradient(from 0deg,transparent 0deg,#f7c78240 45deg,transparent 85deg,#988de540 155deg,transparent 210deg,#f6bc7845 285deg,transparent 340deg);animation:gate-aura 19s linear infinite}
+.gate-orbit{width:72px;height:72px;display:grid;place-items:center;border:1px solid #ffe0ad8f;border-radius:50%;margin:0 auto 23px;background:radial-gradient(circle,#a9759066,#19132866 70%);color:#ffe4ae;font-size:43px;text-shadow:0 0 18px #ffd18a;box-shadow:0 0 30px #f4ae8650;animation:gate-orbit 4.5s ease-in-out infinite}
+.gate-eyebrow{color:#ebc5aa;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+.magic-gate h2{margin:12px auto 13px;font-size:clamp(24px,4vw,32px);line-height:1.2;color:#fff4e2;text-shadow:0 4px 25px #e8ae8650}
+.gate-description{color:#c9bfce;font-size:14px;line-height:1.65;margin:0 0 25px}
+.gate-label{display:block;font-size:12px;color:#f4d4ba;font-weight:700;text-align:left;margin-bottom:9px}
+.magic-gate input{display:block;width:100%;min-width:0;text-align:center;font-size:22px;letter-spacing:.26em;border:1px solid #dbc8d477;background:#121221c9;box-shadow:inset 0 2px 15px #0004;padding:14px 16px;color:#fff5e5}
+.magic-gate input:focus{outline:2px solid #f0be8f;outline-offset:2px}
+.gate-enter{width:100%;margin-top:16px;padding:14px;border:1px solid #fff0c68f;border-radius:15px;font-weight:900;color:#281a2c;background:linear-gradient(130deg,#ffe6af,#eda8a7 65%,#c6b1ef);box-shadow:0 7px 23px #ea9b9d4a;transition:transform .2s,box-shadow .2s}
+.gate-enter:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 30px #eaa2857c}
+.gate-enter:disabled{opacity:.65}
+.gate-error{margin:16px 0 0;color:#ffb7bd;font-weight:700;font-size:13px}
+.gate-loading{min-height:55svh;display:grid;place-items:center;background:none!important}.gate-loading span{font-size:42px;color:#ffdbad;animation:gate-orbit 2s infinite}
+.catalog-reveal{animation:catalog-appear 1.1s cubic-bezier(.2,.8,.2,1) both}
+.magic-overlay{z-index:140!important;animation:magic-curtain-final 3.4s ease-in-out both!important;background:radial-gradient(circle at 50% 51%,#73577bbf 0%,#1a1935f5 46%,#040713 92%)!important;backdrop-filter:blur(5px)}
+.magic-overlay::before{content:"";position:absolute;inset:15%;border-radius:50%;border:2px solid #ffdfa53d;box-shadow:0 0 130px #c19bec7d,inset 0 0 105px #ffd2ac21;animation:spell-expand 2.9s ease-in-out both}
+.magic-stars span{animation:spell-sparkle 2.3s ease-in-out both!important;filter:drop-shadow(0 0 9px #ffe1ab)}
+.magic-ring{position:absolute;width:min(68vw,420px);aspect-ratio:1;border:3px solid #f7dda3b3;border-radius:50%;box-shadow:0 0 37px #efd0a2aa,inset 0 0 64px #bd8be878;animation:spell-expand 2.7s ease-in-out both;pointer-events:none}
+.magic-runes{position:absolute;top:18%;font-size:clamp(24px,5vw,52px);letter-spacing:.9em;color:#efd5b5;text-shadow:0 0 22px #f5a3da;animation:spell-runes 3s ease-in-out both}
+.magic-wand{position:absolute;left:16%;top:12%;width:3px;height:180px;transform:rotate(48deg);background:linear-gradient(transparent,#fae2a5,transparent);filter:drop-shadow(0 0 12px #ffbd8d);animation:wand-sweep 2.3s ease-in-out both}
+.magic-symbol{position:relative;z-index:2;font-size:86px!important;animation:magic-rise .8s ease-out both;text-shadow:0 0 33px #ffd69f!important}
+.magic-title{position:relative;z-index:2;font-family:Georgia,'Times New Roman',serif!important;font-size:clamp(36px,7vw,72px)!important;font-weight:700!important;letter-spacing:-.045em;text-shadow:0 0 33px #ffd8ab70,0 7px 20px #000d!important}
+.magic-subtitle{position:relative;z-index:2;color:#ffe2bc!important}
+@keyframes gate-aura{to{transform:rotate(360deg)}}
+@keyframes gate-orbit{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-9px) rotate(7deg)}}
+@keyframes magic-curtain-final{0%{opacity:0}12%,80%{opacity:1}100%{opacity:0}}
+@keyframes spell-expand{0%{transform:scale(.16) rotate(-45deg);opacity:0}40%{opacity:1}100%{transform:scale(1.9) rotate(35deg);opacity:0}}
+@keyframes spell-runes{0%{opacity:0;transform:translateY(55px) rotate(-8deg)}55%{opacity:1}100%{opacity:0;transform:translateY(-25px) rotate(8deg)}}
+@keyframes spell-sparkle{0%{opacity:0;transform:scale(.1) rotate(0)}35%,75%{opacity:1}100%{opacity:0;transform:scale(2.1) rotate(140deg)}}
+@keyframes wand-sweep{0%{opacity:0;transform:translate(-70vw,40vh) rotate(65deg)}30%,80%{opacity:1}100%{opacity:0;transform:translate(90vw,-40vh) rotate(22deg)}}
+@keyframes catalog-appear{from{opacity:0;transform:translateY(28px);filter:blur(13px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media(max-width:650px){.gate-main{min-height:calc(100svh - 150px)}.magic-gate{padding:32px 22px}.magic-runes{letter-spacing:.4em}.magic-wand{height:90px}}
+@media(prefers-reduced-motion:reduce){.magic-overlay,.magic-gate::before,.gate-orbit,.magic-stars span,.magic-ring,.magic-runes,.magic-wand,.catalog-reveal{animation:none!important}.magic-overlay{display:none}}
