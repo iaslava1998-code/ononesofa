@@ -1,0 +1,24 @@
+
+/* Wrong-PIN demon entrance. Does not unlock or reveal any private data. */
+.demon-overlay{position:fixed;inset:0;z-index:150;pointer-events:none;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px;background:radial-gradient(ellipse at 50% 55%,#75201a 0%,#320f15 42%,#090810 100%);animation:demon-vanish 3.1s ease-in-out both}
+.demon-overlay::before{content:"";position:absolute;inset:-35%;background:conic-gradient(from 25deg,transparent 0deg,#ed482d2c 50deg,transparent 95deg,#f0803036 183deg,transparent 230deg,#e62b4229 300deg,transparent 350deg);filter:blur(30px);animation:demon-rotate 5s linear infinite}
+.demon-smoke{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 97%,#bd3b3245,transparent 65%);animation:demon-smoke-rise 2.8s ease-out both}
+.demon-figure{position:relative;width:180px;height:205px;filter:drop-shadow(0 16px 20px #0009) drop-shadow(0 0 32px #ff3c274a);animation:demon-enter .8s cubic-bezier(.15,1.55,.4,1) both}
+.demon-head{position:absolute;top:33px;left:18px;width:144px;height:139px;border-radius:48% 48% 43% 43%;border:3px solid #ff845d;transform:rotate(-4deg);background:radial-gradient(circle at 48% 20%,#e65c44,#9f202c 68%,#541120);box-shadow:inset -12px -12px 18px #2c061f7f,inset 5px 6px 13px #ffbb7763}
+.demon-horns i{position:absolute;top:3px;z-index:2;width:47px;height:67px;background:linear-gradient(150deg,#ffb170,#a62b42 55%,#672138);clip-path:polygon(12% 100%,23% 36%,0 0,66% 19%,100% 100%);filter:drop-shadow(0 2px 2px #0008)}
+.demon-horns i:first-child{left:27px;transform:rotate(-18deg)}.demon-horns i:last-child{right:27px;transform:scaleX(-1) rotate(-18deg)}
+.demon-brows i{position:absolute;top:38px;width:50px;height:13px;background:#431021;border-radius:90% 15% 10% 10%;transform:rotate(17deg)}.demon-brows i:first-child{left:12px}.demon-brows i:last-child{right:12px;transform:scaleX(-1) rotate(17deg)}
+.demon-eyes i{position:absolute;top:56px;width:39px;height:25px;border-radius:50% 50% 40% 40%;background:#ffe69a;box-shadow:0 0 20px #ffc352,0 0 30px #ff6127}
+.demon-eyes i::after{content:"";display:block;width:8px;height:22px;background:#361225;border-radius:45%;margin:2px auto}
+.demon-eyes i:first-child{left:21px;transform:rotate(11deg)}.demon-eyes i:last-child{right:21px;transform:rotate(-11deg)}
+.demon-grin{position:absolute;bottom:24px;left:21px;right:21px;border-radius:0 0 50% 50%;height:23px;background:#27091d;color:#ffe2bd;font-size:17px;line-height:1.1;letter-spacing:-2px;transform:rotate(4deg)}
+.demon-body{position:absolute;top:155px;left:31px;width:120px;height:65px;border-radius:48% 48% 20% 20%;background:linear-gradient(135deg,#9c2538,#471323);z-index:-1}
+.demon-warning{position:relative;margin-top:22px;font-family:'Golos Text',system-ui,sans-serif;font-size:clamp(24px,5.5vw,49px);line-height:1.22;font-weight:900;letter-spacing:-.055em;color:#ffe9cc;text-shadow:0 5px 15px #08030b,0 0 35px #f03f2b8c;animation:demon-words .75s .15s both}
+.demon-warning span{display:block;color:#ff8b72;text-transform:uppercase;margin-top:5px}
+.demon-note{position:relative;color:#efc4ad;font-size:14px;letter-spacing:.08em;font-weight:700;margin-top:15px;animation:demon-words .8s .35s both}
+@keyframes demon-enter{0%{opacity:0;transform:translateY(115px) scale(.35) rotate(-20deg)}65%{opacity:1;transform:translateY(-13px) scale(1.09) rotate(6deg)}100%{transform:translateY(0) scale(1) rotate(0)}}
+@keyframes demon-vanish{0%{opacity:0}9%,80%{opacity:1}100%{opacity:0}}
+@keyframes demon-words{from{opacity:0;transform:translateY(24px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes demon-rotate{to{transform:rotate(360deg)}}
+@keyframes demon-smoke-rise{from{opacity:0;transform:translateY(90px)}to{opacity:1;transform:translateY(-35px)}}
+@media(prefers-reduced-motion:reduce){.demon-overlay,.demon-overlay::before,.demon-figure,.demon-smoke,.demon-warning,.demon-note{animation:none!important}}
