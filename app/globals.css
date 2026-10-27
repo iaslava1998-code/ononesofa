@@ -223,3 +223,9 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 .planned-item .planned-title{display:block;min-width:0}
 .planned-item{flex-basis:170px;min-height:90px}
 @media(max-width:480px){.planned-item{flex-basis:154px}.planned-item .planned-poster{flex-basis:47px;width:47px;height:68px}}
+
+/* Manual catalog ordering */
+.reorder-controls{display:flex;justify-content:center;gap:8px;padding:5px 0;position:relative;z-index:2}
+.reorder-controls button{width:42px;height:36px;min-width:42px;border-radius:9px;border:1px solid rgba(255,255,255,.28);background:rgba(17,20,29,.85);color:white;font-size:18px;cursor:pointer}
+.reorder-controls button:disabled{opacity:.25;cursor:default}
+.reorder-controls button:not(:disabled):focus-visible{outline:2px solid white;outline-offset:2px}
