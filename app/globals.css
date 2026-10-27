@@ -201,3 +201,6 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 @keyframes cinema-floating-dust{0%{background-position:14px 8px,87px 132px}100%{background-position:44px -360px,117px -290px}}
 @keyframes cinema-projector{0%{opacity:.28;transform:translateY(-5px)}100%{opacity:.7;transform:translateY(8px)}}
 @media(prefers-reduced-motion:reduce){body[data-daypart]::before,body[data-daypart]::after,header::after{animation:none!important}}
+
+/* Screening plans */
+.planned-screenings{margin:1.5rem 0 2rem}.planned-list{display:flex;gap:12px;overflow-x:auto;padding:6px 2px 15px}.planned-item{display:flex;align-items:center;gap:12px;flex:0 0 260px;text-align:left;color:inherit;background:rgba(20,25,37,.82);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:10px;cursor:pointer}.planned-item img{width:54px;height:80px;object-fit:cover;border-radius:6px}.planned-item span{display:flex;flex-direction:column;gap:6px;min-width:0}.planned-item strong{font-size:14px}.planned-item small{font-size:12px}.planned-edit{font-size:11px;opacity:.7;display:none!important}.planned-item:hover{border-color:rgba(255,255,255,.6)}
