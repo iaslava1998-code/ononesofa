@@ -204,3 +204,14 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 
 /* Screening plans */
 .planned-screenings{margin:1.5rem 0 2rem}.planned-list{display:flex;gap:12px;overflow-x:auto;padding:6px 2px 15px}.planned-item{display:flex;align-items:center;gap:12px;flex:0 0 260px;text-align:left;color:inherit;background:rgba(20,25,37,.82);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:10px;cursor:pointer}.planned-item img{width:54px;height:80px;object-fit:cover;border-radius:6px}.planned-item span{display:flex;flex-direction:column;gap:6px;min-width:0}.planned-item strong{font-size:14px}.planned-item small{font-size:12px}.planned-edit{font-size:11px;opacity:.7;display:none!important}.planned-item:hover{border-color:rgba(255,255,255,.6)}
+
+/* Compact upcoming-screenings strip */
+.planned-screenings{margin:12px 0 18px}
+.planned-screenings h2{font-size:clamp(16px,2vw,20px);margin:0 0 8px}
+.planned-list{gap:8px;padding:2px 1px 8px}
+.planned-item{flex:0 0 195px;gap:8px;padding:6px;border-radius:10px;min-height:66px}
+.planned-item img{width:36px;height:52px;flex-shrink:0;border-radius:4px}
+.planned-item span{gap:3px}
+.planned-item strong{font-size:12px;line-height:1.3}
+.planned-item small{font-size:11px;line-height:1.3}
+@media(max-width:480px){.planned-item{flex-basis:170px}.planned-item img{width:32px;height:46px}}
