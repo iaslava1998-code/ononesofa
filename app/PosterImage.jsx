@@ -8,9 +8,10 @@ export default function PosterImage({item,kind='films',...props}){
  const queue=useRef([]);
  const searching=useRef(false);
  const restored=useRef(false);
+ const lookedUp=useRef(false);
  const alive=useRef(true);
  useEffect(()=>{
-  alive.current=true;tried.current=new Set();queue.current=[];searching.current=false;restored.current=false;
+  alive.current=true;tried.current=new Set();queue.current=[];searching.current=false;restored.current=false;lookedUp.current=false;
   setSource(url(item.poster));
   if(!item.poster)recover();
   return()=>{alive.current=false};
@@ -18,8 +19,8 @@ export default function PosterImage({item,kind='films',...props}){
  // eslint-disable-next-line react-hooks/exhaustive-deps
  },[item.id,item.poster,kind]);
  async function recover(){
-  if(searching.current||restored.current||!item.id||!item.tmdb_id){setSource('/placeholder.svg');return}
-  searching.current=true;
+  if(searching.current||lookedUp.current||restored.current||!item.id||!item.tmdb_id){setSource('/placeholder.svg');return}
+  searching.current=true;lookedUp.current=true;
   try{
    const response=await fetch('/api/poster?kind='+encodeURIComponent(kind)+'&id='+encodeURIComponent(item.id));
    if(!response.ok)throw new Error('No alternatives');
