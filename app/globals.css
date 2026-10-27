@@ -229,3 +229,10 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 .reorder-controls button{width:42px;height:36px;min-width:42px;border-radius:9px;border:1px solid rgba(255,255,255,.28);background:rgba(17,20,29,.85);color:white;font-size:18px;cursor:pointer}
 .reorder-controls button:disabled{opacity:.25;cursor:default}
 .reorder-controls button:not(:disabled):focus-visible{outline:2px solid white;outline-offset:2px}
+
+/* Drag-to-reorder film cards */
+.sortable-film[draggable="true"]{cursor:grab;user-select:none;-webkit-user-select:none}
+.sortable-film[draggable="true"]:active{cursor:grabbing}
+.sortable-film.drag-target{outline:2px dashed rgba(255,255,255,.85);outline-offset:4px;border-radius:9px}
+.sortable-film:focus-visible{outline:2px solid white;outline-offset:3px}
+@media(pointer:coarse){.sortable-film{touch-action:pan-y}}
