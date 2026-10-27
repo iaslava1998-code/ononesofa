@@ -1,5 +1,5 @@
 import {NextResponse} from 'next/server';
-import {authenticated} from '../../../../lib/auth';
+import {authenticated} from '../../../lib/auth';
 
 const map={радость:'happy',смех:'laugh',смешно:'funny',любовь:'love',грусть:'sad',злость:'angry',удивление:'surprised',объятия:'hug',кот:'cat',котики:'cat',поцелуй:'kiss',страх:'scared',танцы:'dance',ура:'celebration',милота:'cute',реакция:'reaction'};
 export async function GET(request){
