@@ -10,7 +10,7 @@ export async function GET(request){
  const page=Math.min(5,Math.max(1,Number(params.get('page'))||1));
  const today=new Date(),start=new Date(today);start.setDate(start.getDate()-100);
  const fmt=d=>d.toISOString().slice(0,10);
- const qs=new URLSearchParams({language:'ru-RU',sort_by:'primary_release_date.desc',include_adult:'false',include_video:'false',page:String(page),'primary_release_date.gte':fmt(start),'primary_release_date.lte':fmt(today),'vote_count.gte':'0'});
+ const qs=new URLSearchParams({language:'ru-RU',sort_by:'primary_release_date.desc',include_adult:'false',include_video:'false',page:String(page),'primary_release_date.gte':fmt(start),'primary_release_date.lte':fmt(today),'vote_average.gte':'7','vote_count.gte':'50'});
  if(genres[genre])qs.set('with_genres',String(genres[genre]));
  try{
   const r=await fetch('https://api.themoviedb.org/3/discover/movie?'+qs,{headers:{Authorization:'Bearer '+key},next:{revalidate:21600}});
