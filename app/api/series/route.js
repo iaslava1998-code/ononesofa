@@ -12,7 +12,7 @@ const valid=n=>n===null||(typeof n==='number'&&Number.isFinite(n)&&n>=0&&n<=10);
 export async function PATCH(request){
  if(!authenticated(request))return fail('Unauthorized',401);const c=db();if(!c)return fail('Database not configured',503);
  const b=await request.json().catch(()=>({}));if(typeof b.id!=='string'||!valid(b.slava)||!valid(b.veronika))return fail('Invalid data',400);
- const {error}=await c.from('series').update({slava:b.slava,veronika:b.veronika}).eq('id',b.id);
+ const {error}=await c.from('series').update({slava:b.slava,veronika:b.veronika,watched_at:typeof b.watched_at==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(b.watched_at)?b.watched_at:null}).eq('id',b.id);
  return error?fail('Could not update ratings',500):NextResponse.json({ok:true});
 }
 export async function POST(request){
