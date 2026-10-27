@@ -10,6 +10,10 @@ const poster=(path)=>path?.startsWith('https://')?path:path?'https://image.tmdb.
 export default function Home(){
  const [films,setFilms]=useState([]),[tab,setTab]=useState('want'),[q,setQ]=useState(''),[selected,setSelected]=useState(null),[pin,setPin]=useState(''),[unlocked,setUnlocked]=useState(false),[status,setStatus]=useState(''),[add,setAdd]=useState(false),[found,setFound]=useState([]);
  const searchRequest=useRef(0);
+ const draggingId=useRef(null);
+ const touchDrag=useRef(null);
+ const [dragOver,setDragOver]=useState(null);
+ const suppressClick=useRef(false);
  const [kind,setKind]=useState('films'),[series,setSeries]=useState([]);
  const [loading,setLoading]=useState(false),[checkingSession,setCheckingSession]=useState(true),[zoom,setZoom]=useState(null),[magic,setMagic]=useState(false),[revealed,setRevealed]=useState(false),[loggingIn,setLoggingIn]=useState(false),[wrongMagic,setWrongMagic]=useState(false),[ratingBurst,setRatingBurst]=useState(null),[roulette,setRoulette]=useState(null);
  async function refresh(){try{const [fr,sr]=await Promise.all([fetch('/api/films',{cache:'no-store'}),fetch('/api/series',{cache:'no-store'})]);if(fr.ok){const d=await fr.json();if(Array.isArray(d.films))setFilms(d.films)}if(sr.ok){const d=await sr.json();if(Array.isArray(d.series))setSeries(d.series)}}catch{}}
@@ -25,24 +29,64 @@ export default function Home(){
  async function login(){if(loggingIn)return;setLoggingIn(true);setStatus('');try{const r=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin})});if(!r.ok){if(r.status===401){setStatus('');setWrongMagic(true);setTimeout(()=>setWrongMagic(false),3100)}else setStatus('Не удалось проверить код');return}sessionStorage.setItem('sofa_session_tab','1');setUnlocked(true);setPin('');setMagic(true);await refresh();setTimeout(()=>{setMagic(false);setRevealed(true)},3400)}catch{setStatus('Нет связи с сервером. Попробуй ещё раз.')}finally{setLoggingIn(false)}}
  async function save(movie){setStatus('Сохраняю оценку…');try{const r=await fetch(kind==='series'?'/api/series':'/api/films',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:movie.id,slava:movie.slava,veronika:movie.veronika,watched_at:movie.watched_at||null,planned_at:movie.planned_at||null})});if(r.ok){const scores=[movie.slava,movie.veronika].filter(v=>v!=null&&Number.isFinite(Number(v))).map(Number);const previous=items.find(item=>item.id===movie.id);const changed=!!previous&&(previous.slava!==movie.slava||previous.veronika!==movie.veronika);if(changed&&scores.length){const score=scores.reduce((a,b)=>a+b,0)/scores.length;setRatingBurst({key:Date.now(),score,count:Math.max(3,Math.round(score*5))});setTimeout(()=>setRatingBurst(null),2900)}await refresh();setSelected(null);setStatus('')}else{const d=await r.json().catch(()=>({}));setStatus(r.status===401?'Нужно снова ввести PIN после обновления сайта. Закрой фильм и нажми «Войти».':r.status===503?'База данных не подключена. Нужно проверить ключ Supabase в Vercel.':'Ошибка сохранения: '+(d.error||'код '+r.status))}}catch{setStatus('Нет связи с сервером, попробуй ещё раз')}}
  async function removeFilm(movie){if(!window.confirm('Удалить «'+movie.title+'» из общего списка? Это действие нельзя отменить.'))return;setStatus('Удаляю фильм…');try{const r=await fetch(kind==='series'?'/api/series':'/api/films',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:movie.id})});if(!r.ok){setStatus(r.status===401?'Нужно снова войти по PIN.':'Не удалось удалить фильм');return}setSelected(null);setStatus('');await refresh()}catch{setStatus('Нет связи с сервером')}}
- async function moveFilm(id,direction){
-  if(q){setStatus('Очисти поиск, чтобы менять порядок всего списка.');return}
-  const group=[...items].filter(f=>(tab==='seen'?f.slava!=null||f.veronika!=null:f.slava==null&&f.veronika==null)).sort((a,b)=>(Number.isInteger(a.sort_order)&&Number.isInteger(b.sort_order)?a.sort_order-b.sort_order:Number.isInteger(a.sort_order)?-1:Number.isInteger(b.sort_order)?1:tab==='seen'?(watchedOrder.get(a.id)??Infinity)-(watchedOrder.get(b.id)??Infinity):0));
-  const index=group.findIndex(f=>f.id===id),other=index+direction;
-  if(index<0||other<0||other>=group.length)return;
-  [group[index],group[other]]=[group[other],group[index]];
-  const oldItems=items;
-  const updated=items.map(f=>{const i=group.findIndex(x=>x.id===f.id);return i<0?f:{...f,sort_order:i}});
-  if(kind==='series')setSeries(updated);else setFilms(updated);
-  setStatus('');
+ async function reorderFilms(sourceId,targetId){
+  if(q||!sourceId||!targetId||sourceId===targetId)return;
+  const group=[...items].filter(f=>tab==='seen'?f.slava!=null||f.veronika!=null:f.slava==null&&f.veronika==null).sort((a,b)=>Number.isInteger(a.sort_order)&&Number.isInteger(b.sort_order)?a.sort_order-b.sort_order:Number.isInteger(a.sort_order)?-1:Number.isInteger(b.sort_order)?1:tab==='seen'?(watchedOrder.get(a.id)??Infinity)-(watchedOrder.get(b.id)??Infinity):0);
+  const from=group.findIndex(f=>f.id===sourceId),to=group.findIndex(f=>f.id===targetId);
+  if(from<0||to<0)return;
+  const [moved]=group.splice(from,1);group.splice(to,0,moved);
+  const original=items;
+  const positions=new Map(group.map((f,i)=>[f.id,i]));
+  const revised=items.map(f=>positions.has(f.id)?{...f,sort_order:positions.get(f.id)}:f);
+  if(kind==='series')setSeries(revised);else setFilms(revised);
   try{
    const response=await fetch('/api/order',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind,tab,ids:group.map(f=>f.id)})});
-   if(!response.ok)throw new Error('Failed to save order');
+   if(!response.ok)throw Error('Save failed');
    await refresh();
   }catch{
-   if(kind==='series')setSeries(oldItems);else setFilms(oldItems);
+   if(kind==='series')setSeries(original);else setFilms(original);
    setStatus('Не удалось сохранить порядок. Попробуй ещё раз.');
   }
+ }
+ function dragStart(event,id){
+  if(q)return;
+  draggingId.current=id;
+  event.dataTransfer.effectAllowed='move';
+  event.dataTransfer.setData('text/plain',id);
+ }
+ function dragEnd(){draggingId.current=null;setDragOver(null)}
+ function dragDrop(event,id){
+  event.preventDefault();
+  const from=draggingId.current||event.dataTransfer.getData('text/plain');
+  dragEnd();reorderFilms(from,id);
+ }
+ function touchStart(event,id){
+  if(q||event.touches.length!==1)return;
+  const t=event.touches[0];touchDrag.current={id,x:t.clientX,y:t.clientY,moved:false};
+ }
+ function touchMove(event){
+  const d=touchDrag.current;if(!d||event.touches.length!==1)return;
+  const t=event.touches[0];
+  if(Math.hypot(t.clientX-d.x,t.clientY-d.y)>12)d.moved=true;
+  if(!d.moved)return;
+  event.preventDefault();
+  const node=document.elementFromPoint(t.clientX,t.clientY)?.closest('[data-reorder-id]');
+  setDragOver(node?.getAttribute('data-reorder-id')||null);
+ }
+ function touchEnd(event){
+  const d=touchDrag.current;touchDrag.current=null;setDragOver(null);
+  if(!d?.moved)return;
+  suppressClick.current=true;
+  setTimeout(()=>{suppressClick.current=false},350);
+  const t=event.changedTouches[0];
+  const target=document.elementFromPoint(t.clientX,t.clientY)?.closest('[data-reorder-id]')?.getAttribute('data-reorder-id');
+  if(target)reorderFilms(d.id,target);
+ }
+ function reorderKey(event,id){
+  if(!event.altKey||!['ArrowLeft','ArrowRight'].includes(event.key))return;
+  event.preventDefault();
+  const index=filtered.findIndex(x=>x.id===id),target=filtered[index+(event.key==='ArrowLeft'?-1:1)];
+  if(target)reorderFilms(id,target.id);
  }
  function changeKind(nextKind){
   searchRequest.current+=1;
@@ -78,7 +122,7 @@ export default function Home(){
  {status&&<p className="notice">{status}</p>}
  {scheduled.length>0&&<section className="planned-screenings"><h2>Запланированные просмотры</h2><div className="planned-list">{scheduled.map(f=><button type="button" className="planned-item" key={f.id} onClick={()=>setSelected({...f})}><span className="planned-poster"><PosterImage item={f} kind={kind} alt="" /><span className="planned-date-badge">{new Date(f.planned_at+'T12:00:00').toLocaleDateString('ru-RU',{day:'2-digit',month:'short'})}</span></span><span className="planned-title"><strong>{f.title}</strong></span><span className="planned-edit">Изменить дату</span></button>)}</div></section>}
  <h2>{kind==='series'?'Сериалы · ':''}{tab==='want'?'Хотим посмотреть':'Уже посмотрели'} <span className="muted">({filtered.length})</span></h2>
- <div className="grid">{filtered.map(f=><div key={f.id} style={{position:"relative",minWidth:0}}><button className="movie" style={{width:"100%",height:"100%"}} onClick={()=>setSelected({...f})}><div className="poster-frame"><PosterImage className="poster" item={f} kind={kind} alt={'Постер '+f.title}/><span className="film-ribbon">{tab==='seen'?'✓ Просмотрено':'✦ В планах'}</span>{tab==='seen'&&sharedRating(f)!==null&&<span className="shared-rating" aria-label={'Общая оценка '+sharedRating(f)+' из 10'}><b>{sharedRating(f)}</b><small>/10</small></span>}</div><div className="film-meta"><strong>{tab==='seen'?'№'+watchedOrder.get(f.id)+' · ':''}{f.title}</strong><small>{f.year||''}{tab==='seen'?' · Слава '+(f.slava??'—')+' · Вероника '+(f.veronika??'—'):''}{tab==='seen'&&f.watched_at?' · '+new Date(f.watched_at+'T12:00:00').toLocaleDateString('ru-RU'):''}</small></div></button>{unlocked&&!q&&<div className="reorder-controls"><button type="button" onClick={()=>moveFilm(f.id,-1)} disabled={filtered[0]?.id===f.id} aria-label={'Переместить '+f.title+' раньше'} title="Раньше">←</button><button type="button" onClick={()=>moveFilm(f.id,1)} disabled={filtered[filtered.length-1]?.id===f.id} aria-label={'Переместить '+f.title+' позже'} title="Позже">→</button></div>}{unlocked&&<button aria-label={'Удалить '+(kind==='series'?'сериал ':'фильм ')+f.title} title={kind==='series'?'Удалить сериал':'Удалить фильм'} onClick={()=>removeFilm(f)} style={{position:"absolute",top:8,right:8,zIndex:2,width:34,height:34,borderRadius:"50%",border:"1px solid rgba(255,255,255,.35)",background:"rgba(20,19,26,.85)",color:"white",fontSize:24,cursor:"pointer",display:"grid",placeItems:"center",lineHeight:1}}>×</button>}</div>)}</div>{filtered.length===0&&<div className="empty-state"><p>{q?'По запросу «'+q+'» ничего не найдено.':'В этом разделе пока нет '+(kind==='series'?'сериалов.':'фильмов.')}</p>{q?<button className="action" onClick={()=>setQ('')}>Сбросить поиск</button>:<button className="action primary" onClick={openSearch} >{kind==='series'?'+ Добавить сериал':'+ Добавить фильм'}</button>}</div>}
+ <div className="grid">{filtered.map(f=><div key={f.id} data-reorder-id={f.id} className={"sortable-film "+(dragOver===f.id?"drag-target":"")} style={{position:"relative",minWidth:0}} draggable={unlocked&&!q} onDragStart={e=>dragStart(e,f.id)} onDragOver={e=>{if(!q){e.preventDefault();setDragOver(f.id)}}} onDrop={e=>dragDrop(e,f.id)} onDragEnd={dragEnd} onTouchStart={e=>touchStart(e,f.id)} onTouchMove={touchMove} onTouchEnd={touchEnd} onTouchCancel={()=>{touchDrag.current=null;setDragOver(null)}} onKeyDown={e=>reorderKey(e,f.id)} tabIndex={unlocked&&!q?0:undefined} aria-label={unlocked&&!q?f.title+". Для перестановки перетащи карточку или нажми Alt и стрелку.":undefined}><button className="movie" style={{width:"100%",height:"100%"}} onClick={()=>{if(!suppressClick.current)setSelected({...f})}}><div className="poster-frame"><PosterImage className="poster" item={f} kind={kind} alt={'Постер '+f.title}/><span className="film-ribbon">{tab==='seen'?'✓ Просмотрено':'✦ В планах'}</span>{tab==='seen'&&sharedRating(f)!==null&&<span className="shared-rating" aria-label={'Общая оценка '+sharedRating(f)+' из 10'}><b>{sharedRating(f)}</b><small>/10</small></span>}</div><div className="film-meta"><strong>{tab==='seen'?'№'+watchedOrder.get(f.id)+' · ':''}{f.title}</strong><small>{f.year||''}{tab==='seen'?' · Слава '+(f.slava??'—')+' · Вероника '+(f.veronika??'—'):''}{tab==='seen'&&f.watched_at?' · '+new Date(f.watched_at+'T12:00:00').toLocaleDateString('ru-RU'):''}</small></div></button>{unlocked&&<button aria-label={'Удалить '+(kind==='series'?'сериал ':'фильм ')+f.title} title={kind==='series'?'Удалить сериал':'Удалить фильм'} onClick={()=>removeFilm(f)} style={{position:"absolute",top:8,right:8,zIndex:2,width:34,height:34,borderRadius:"50%",border:"1px solid rgba(255,255,255,.35)",background:"rgba(20,19,26,.85)",color:"white",fontSize:24,cursor:"pointer",display:"grid",placeItems:"center",lineHeight:1}}>×</button>}</div>)}</div>{filtered.length===0&&<div className="empty-state"><p>{q?'По запросу «'+q+'» ничего не найдено.':'В этом разделе пока нет '+(kind==='series'?'сериалов.':'фильмов.')}</p>{q?<button className="action" onClick={()=>setQ('')}>Сбросить поиск</button>:<button className="action primary" onClick={openSearch} >{kind==='series'?'+ Добавить сериал':'+ Добавить фильм'}</button>}</div>}
  {unlocked&&<Chat unlocked={unlocked}/>}<nav className="mobile-bottom-nav" aria-label="Навигация"><button onClick={()=>{changeKind("films");window.scrollTo({top:0,behavior:"smooth"})}}>Фильмы</button><button onClick={()=>{changeKind("series");window.scrollTo({top:0,behavior:"smooth"})}}>Сериалы</button><a href="#chat">Чат</a></nav></main>}<footer>На одном диване · наш маленький киноклуб</footer>
  {roulette&&<div className="modalback" onClick={()=>setRoulette(null)}><div className="modal movie-roulette" onClick={e=>e.stopPropagation()}><button className="close" onClick={()=>setRoulette(null)}>×</button><div className="roulette-spark">✦</div><h2>Сегодня смотрим?</h2><PosterImage item={roulette} kind={kind} alt={'Постер '+roulette.title}/><h3>{roulette.title}</h3><p className="muted">{roulette.year||''}</p><div className="film-actions"><button className="action primary" onClick={()=>{setSelected({...roulette});setRoulette(null)}}>Открыть фильм</button><button className="action" onClick={pickMovie}>Выбрать другой</button></div></div></div>}
  {selected&&<div className="modalback" onClick={()=>setSelected(null)}><div className="modal" onClick={e=>e.stopPropagation()}><button className="close" onClick={()=>setSelected(null)}>×</button><div className="details"><button type="button" className="poster-preview" aria-label="Увеличить постер" onClick={()=>setZoom(selected)}><PosterImage item={selected} kind={kind} alt={'Постер '+selected.title}/></button><div><h2>{selected.title}</h2><p className="muted">{selected.year||''}</p><p>{selected.overview||'Выберем фильм и посмотрим вместе.'}</p></div></div>{kind==='films'&&<Trailer key={selected.id} filmId={selected.id}/>} <div className="scores">{[['Слава','slava'],['Вероника','veronika']].map(([n,key])=><div className="score-stars" key={key}><strong>{n}: {selected[key]??'—'}/10</strong><div className="score-star-row">{Array.from({length:10},(_,i)=><button type="button" disabled={!unlocked} key={i} aria-label={n+': '+(i+1)+' из 10'} className={selected[key]!=null&&i<selected[key]?'lit':''} onClick={()=>setSelected({...selected,[key]:i+1})}>★</button>)}</div><button className="score-clear" type="button" onClick={()=>setSelected({...selected,[key]:null})}>Очистить</button></div>)}</div><label className="watch-date">Запланировать просмотр <input type="date" value={selected.planned_at||''} onChange={e=>setSelected({...selected,planned_at:e.target.value||null})}/></label><p className="hint">Дату можно изменить или очистить и сохранить.</p><label className="watch-date">Дата просмотра <input type="date" value={selected.watched_at||''} onChange={e=>setSelected({...selected,watched_at:e.target.value||null})}/></label><p className="hint">Оценка переносит фильм в «Посмотрели». Чтобы вернуть его, очистите обе оценки.</p>{status&&<p role="alert" className="notice">{status}</p>}<div className="film-actions"><button disabled={!unlocked} className="action primary" onClick={()=>save(selected)}>Сохранить изменения</button><button disabled={!unlocked} className="action delete-film" onClick={()=>removeFilm(selected)} >{kind==='series'?'Удалить сериал':'Удалить фильм'}</button></div>{unlocked&&kind==='films'&&<Comments key={selected.id} filmId={selected.id}/>} </div></div>}
