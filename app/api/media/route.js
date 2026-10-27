@@ -23,6 +23,27 @@ export async function GET(request){
    }
   }catch{}
  }
+ // Openverse is available without a private API key; use it before Commons.
+ try{
+  const page=Math.floor(offset/20)+1;
+  const search=new URL('https://api.openverse.org/v1/images/');
+  search.searchParams.set('q',type==='gif'?term+' gif':term+' sticker');
+  search.searchParams.set('page_size','20');
+  search.searchParams.set('page',String(page));
+  if(type==='gif')search.searchParams.set('extension','gif');
+  else search.searchParams.set('extension','png');
+  const res=await fetch(search,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(9000),cache:'no-store'});
+  if(res.ok){
+   const data=await res.json();
+   const items=(data.results||[]).flatMap(x=>{
+    const url=x.url||'';
+    if(!/^https:\/\//i.test(url)||url.length>1700)return[];
+    if(type==='gif'&&!/\.gif(?:\?|$)/i.test(url))return[];
+    return[{url,preview:x.thumbnail||url,title:x.title||term,source:x.foreign_landing_url||'https://openverse.org/'}];
+   });
+   if(items.length)return NextResponse.json({items,nextOffset:data.next?offset+20:null,provider:'Openverse'},{headers:{'Cache-Control':'private, no-store'}});
+  }
+ }catch{}
  const query=type==='gif'?term+' animated gif':term+' (sticker OR emoji OR emoticon OR cartoon)';
  const params=new URLSearchParams({action:'query',generator:'search',gsrsearch:query,gsrnamespace:'6',gsrlimit:'50',gsroffset:String(offset),prop:'imageinfo',iiprop:'url|mime|size',format:'json',formatversion:'2'});
  try{
