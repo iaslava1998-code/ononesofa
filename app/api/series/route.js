@@ -17,7 +17,7 @@ export async function PATCH(request){
 }
 export async function POST(request){
  if(!authenticated(request))return fail('Unauthorized',401);const c=db();if(!c)return fail('Database not configured',503);
- const b=await request.json().catch(()=>({}));if(!Number.isInteger(b.tmdb_id)||b.tmdb_id<=0||typeof b.title!=='string'||!b.title.trim()||b.title.length>200)return fail('Invalid series',400);
+ const b=await request.json().catch(()=>({}));if((b.media_type&&b.media_type!=='tv')||!Number.isInteger(b.tmdb_id)||b.tmdb_id<=0||typeof b.title!=='string'||!b.title.trim()||b.title.length>200)return fail('Invalid series',400);
  const {error}=await c.from('series').upsert({tmdb_id:b.tmdb_id,title:b.title.trim(),year:b.year?Number(b.year):null,poster:b.poster||null,overview:b.overview||null},{onConflict:'tmdb_id',ignoreDuplicates:true});
  return error?fail('Could not save series',500):NextResponse.json({ok:true});
 }
