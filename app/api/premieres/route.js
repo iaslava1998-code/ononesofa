@@ -16,6 +16,21 @@ export async function GET(request){
   const r=await fetch('https://api.themoviedb.org/3/discover/movie?'+qs,{headers:{Authorization:'Bearer '+key},next:{revalidate:21600}});
   if(!r.ok)return NextResponse.json({error:'TMDB unavailable'},{status:502});
   const d=await r.json();
-  return NextResponse.json({results:(d.results||[]).filter(f=>f.poster_path).map(f=>({tmdb_id:f.id,title:f.title,year:f.release_date?.slice(0,4)||null,release_date:f.release_date,poster:f.poster_path,overview:f.overview,rating:f.vote_average})),pages:Math.min(d.total_pages||1,5)},{headers:{'Cache-Control':'private, max-age=1800'}});
+  const source=(d.results||[]).filter(f=>f.poster_path);
+  const russian=await Promise.all(source.map(async f=>{
+   let title=f.title||f.original_title||'Без названия';
+   if(!/[А-Яа-яЁё]/.test(title)){
+    try{
+     const rr=await fetch('https://api.themoviedb.org/3/movie/'+f.id+'/translations',{headers:{Authorization:'Bearer '+key},next:{revalidate:86400}});
+     if(rr.ok){
+      const td=await rr.json();
+      const ru=(td.translations||[]).find(t=>t.iso_639_1==='ru'&&t.iso_3166_1==='RU')||(td.translations||[]).find(t=>t.iso_639_1==='ru');
+      if(ru?.data?.title?.trim())title=ru.data.title.trim();
+     }
+    }catch{}
+   }
+   return {tmdb_id:f.id,title,year:f.release_date?.slice(0,4)||null,release_date:f.release_date,poster:f.poster_path,overview:f.overview,rating:f.vote_average};
+  }));
+  return NextResponse.json({results:russian,pages:Math.min(d.total_pages||1,5)},{headers:{'Cache-Control':'private, max-age=1800'}});
  }catch{return NextResponse.json({error:'Could not load premieres'},{status:502})}
 }
