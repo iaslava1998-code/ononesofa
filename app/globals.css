@@ -266,3 +266,12 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 @keyframes sofa-smile-breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.1)}}
 @media(max-width:460px){.sofa-identity-options{gap:8px;padding-top:156px}.sofa-avatar{width:min(142px,99%);height:160px}.sofa-identity-choice{padding-left:5px!important;padding-right:5px!important}}
 @media(prefers-reduced-motion:reduce){.sofa-avatar,.sofa-avatar-head,.sofa-avatar-open-eyes,.sofa-avatar-shut-eyes,.sofa-avatar-happy-mouth{animation:none!important;transition:none!important}}
+
+/* Approved portrait-based avatars on profile chooser */
+.sofa-identity-options{padding-top:182px}
+.sofa-avatar{width:min(174px,100%);height:190px;bottom:calc(100% - 1px);border-radius:24px 24px 0 0;overflow:hidden;filter:drop-shadow(0 8px 15px rgba(0,0,0,.22));-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 11%,#000 82%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 11%,#000 82%,transparent 100%)}
+.sofa-photo-avatar{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-avatar{animation:sofa-portrait-float 3.1s ease-in-out .5s infinite}
+@keyframes sofa-portrait-float{0%,100%{translate:0 0}50%{translate:0 -5px}}
+@media(max-width:460px){.sofa-identity-options{padding-top:150px}.sofa-avatar{width:min(140px,100%);height:154px}}
+@media(prefers-reduced-motion:reduce){.sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-avatar{animation:none}}
