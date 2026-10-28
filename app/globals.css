@@ -291,3 +291,14 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 .sofa-photo-avatar{width:100%;height:100%;object-fit:contain;object-position:center bottom}
 .sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-avatar{animation:none}
 @media(max-width:460px){.sofa-identity-options{padding-top:150px}.sofa-avatar{width:min(158px,110%);height:155px}}
+
+/* Game-style character selector, separate animated assets retain sharp lettering */
+.magic-gate:has(.sofa-identity-options){overflow:visible}
+.sofa-identity-options{padding-top:245px;gap:14px}
+.sofa-identity-choice{overflow:visible!important;isolation:isolate;position:relative;z-index:0}
+.sofa-avatar{width:clamp(170px,24vw,270px);height:250px;bottom:calc(100% + 4px);overflow:visible;mask:none;-webkit-mask:none;border-radius:0;filter:drop-shadow(0 12px 13px #0008);opacity:0;transform:translate(-50%,24px) scale(.92);transition:opacity .3s ease,transform .6s cubic-bezier(.2,1.15,.3,1)}
+.sofa-photo-avatar{width:100%;height:100%;object-fit:contain;object-position:bottom center}
+.sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-avatar{opacity:1;transform:translate(-50%,0) scale(1);animation:none}
+.sofa-identity-choice:is(:hover,:focus-visible,:active){z-index:5}
+@media(max-width:600px){.sofa-identity-options{padding-top:165px;gap:8px}.sofa-avatar{width:min(190px,115%);height:174px}.sofa-identity-choice{padding-left:4px!important;padding-right:4px!important}}
+@media(prefers-reduced-motion:reduce){.sofa-avatar{transition:none}}
