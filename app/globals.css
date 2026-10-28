@@ -302,3 +302,14 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 .sofa-identity-choice:is(:hover,:focus-visible,:active){z-index:5}
 @media(max-width:600px){.sofa-identity-options{padding-top:165px;gap:8px}.sofa-avatar{width:min(190px,115%);height:174px}.sofa-identity-choice{padding-left:4px!important;padding-right:4px!important}}
 @media(prefers-reduced-motion:reduce){.sofa-avatar{transition:none}}
+
+/* Select a profile by clicking the full illustrated name, not a separate button. */
+.magic-gate:has(.sofa-character-options){width:min(100%,780px);padding:32px clamp(12px,3vw,32px) 30px;overflow:visible}
+.sofa-identity-options.sofa-character-options{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;gap:clamp(6px,2vw,22px);padding-top:0;margin-top:20px}
+.sofa-character-button{display:block;position:relative;width:100%;padding:3px;border:0;background:transparent;box-shadow:none;cursor:pointer;border-radius:20px;transition:transform .3s ease,filter .3s ease;min-width:0;overflow:visible}
+.sofa-character-image{display:block;width:100%;height:auto;max-height:370px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 12px 12px rgba(0,0,0,.36))}
+.sofa-character-button:is(:hover,:focus-visible){transform:translateY(-9px) scale(1.035);filter:brightness(1.08)}
+.sofa-character-button:active{transform:translateY(-2px) scale(.98)}
+.sofa-character-button:focus-visible{outline:3px solid #ffe0ab;outline-offset:4px}
+@media(max-width:600px){.magic-gate:has(.sofa-character-options){padding:23px 12px}.sofa-identity-options.sofa-character-options{gap:4px;margin-top:15px}.sofa-character-button{padding:0}.sofa-character-image{max-height:255px}}
+@media(prefers-reduced-motion:reduce){.sofa-character-button{transition:none}}
