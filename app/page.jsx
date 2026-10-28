@@ -8,24 +8,47 @@ import PosterImage from './PosterImage';
 const sharedRating=(f)=>{const scores=[f.slava,f.veronika].filter(v=>v!==null&&v!==undefined&&Number.isFinite(Number(v))).map(Number);return scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length*10)/10:null};
 const poster=(path)=>path?.startsWith('https://')?path:path?'https://image.tmdb.org/t/p/w500'+path:null;
 function SofaCharacter({girl=false}){
- return <svg className="sofa-avatar-svg" viewBox="0 0 180 210" aria-hidden="true" focusable="false">
-  <ellipse cx="90" cy="195" rx="67" ry="10" fill="#090b19" opacity=".2"/>
-  <path d="M30 204Q27 150 66 141L114 141Q153 150 150 204Z" fill={girl?"#cc81d9":"#6f9fdf"} stroke="#252742" strokeWidth="5"/>
-  <path d="M66 148L90 180L114 148" fill="none" stroke={girl?"#f1b9ef":"#adcafa"} strokeWidth="7" strokeLinecap="round"/>
-  <path d="M78 127H102V152Q90 165 78 152Z" fill="#e9a782" stroke="#8e574d" strokeWidth="3"/>
-  {girl&&<path d="M46 78Q39 16 88 15Q144 9 144 82L148 160Q132 178 116 160L63 161Q39 171 39 141Z" fill="#56324c" stroke="#38273c" strokeWidth="4"/>}
-  <ellipse cx="90" cy="87" rx="49" ry="60" fill="#efb68f" stroke="#8e574d" strokeWidth="4"/>
-  <ellipse cx="41" cy="94" rx="9" ry="14" fill="#efb68f" stroke="#8e574d" strokeWidth="3"/>
-  <ellipse cx="139" cy="94" rx="9" ry="14" fill="#efb68f" stroke="#8e574d" strokeWidth="3"/>
-  {girl?<path d="M42 78Q39 22 90 22Q145 22 139 83Q123 61 115 46Q95 72 61 72L49 100Z" fill="#56324c" stroke="#38273c" strokeWidth="4"/>:<path d="M41 80Q32 52 48 36Q58 19 80 24Q103 11 123 33Q145 38 139 79Q118 73 111 58Q98 69 83 61Q67 77 41 80Z" fill="#382b38" stroke="#2b2432" strokeWidth="4"/>}
-  <path className="sofa-avatar-eyes" d="M64 91Q73 85 81 91M99 91Q108 85 116 91" fill="none" stroke="#34263b" strokeWidth="4.5" strokeLinecap="round"/>
-  {girl&&<path d="M62 88L58 83M117 88L121 83" stroke="#34263b" strokeWidth="2.5" strokeLinecap="round"/>}
-  <ellipse cx="57" cy="109" rx="11" ry="6" fill="#df8294" opacity=".6"/>
-  <ellipse cx="123" cy="109" rx="11" ry="6" fill="#df8294" opacity=".6"/>
-  <path d="M88 98L85 111Q90 115 95 110" fill="none" stroke="#bc7e68" strokeWidth="2.5" strokeLinecap="round"/>
-  <path className="sofa-avatar-smile" d="M74 119Q90 136 107 119" fill="none" stroke="#873f55" strokeWidth="4.5" strokeLinecap="round"/>
-  <path d="M34 165Q17 156 14 174Q13 187 32 193" fill={girl?"#cc81d9":"#6f9fdf"} stroke="#252742" strokeWidth="5"/>
-  <path d="M146 165Q165 150 170 170Q173 181 151 193" fill={girl?"#cc81d9":"#6f9fdf"} stroke="#252742" strokeWidth="5"/>
+ const hair=girl?'#563347':'#292c40',hairLight=girl?'#86526e':'#50556d',shirt=girl?'#ce81aa':'#6a88b7';
+ return <svg className={'sofa-avatar-svg '+(girl?'sofa-avatar-girl':'sofa-avatar-boy')} viewBox="0 0 220 245" aria-hidden="true" focusable="false">
+ <defs>
+  <linearGradient id={girl?'dressGirl':'dressBoy'} x1="0" x2="1" y1="0" y2="1"><stop stopColor={girl?'#f1b8ce':'#a6bce3'}/><stop offset="1" stopColor={shirt}/></linearGradient>
+  <linearGradient id={girl?'faceGirl':'faceBoy'} x1="0" x2=".75" y1=".2" y2="1"><stop stopColor="#ffdfc3"/><stop offset=".7" stopColor="#f4b991"/><stop offset="1" stopColor="#e5a27f"/></linearGradient>
+ </defs>
+ <ellipse cx="110" cy="237" rx="75" ry="6" fill="#151422" opacity=".18"/>
+ <g className="sofa-avatar-body">
+ <path d="M36 245Q34 187 75 172L145 172Q188 188 185 245Z" fill={girl?'url(#dressGirl)':'url(#dressBoy)'} stroke="#363447" strokeWidth="3"/>
+ <path d="M70 180Q53 191 51 225M149 180Q167 191 170 225" fill="none" stroke="#ffffff" opacity=".24" strokeWidth="4"/>
+ <path d="M87 174L109 194L132 174" fill="none" stroke={girl?'#fff1f4':'#dfedff'} strokeWidth="6" strokeLinecap="round"/>
+ {girl&&<path d="M99 192Q110 202 121 192M110 196V244" fill="none" stroke="#a75b84" strokeWidth="2.5"/>}
+ </g>
+ <g className="sofa-avatar-head">
+ {girl&&<path d="M52 112Q34 51 72 25Q107 4 146 26Q185 51 166 130L171 193Q151 206 137 176L75 177Q52 204 46 180Z" fill={hair} stroke="#312a39" strokeWidth="3"/>}
+ <path d="M97 151H124V181Q110 195 96 181Z" fill="#eaa987" stroke="#aa735e" strokeWidth="2.5"/>
+ <ellipse cx="65" cy="115" rx="11" ry="16" fill="#f1b392" stroke="#a9765d" strokeWidth="2.5"/>
+ <ellipse cx="155" cy="115" rx="11" ry="16" fill="#f1b392" stroke="#a9765d" strokeWidth="2.5"/>
+ <path d="M62 88Q63 37 111 35Q158 36 159 89L157 123Q149 166 111 170Q71 166 63 123Z" fill={girl?'url(#faceGirl)':'url(#faceBoy)'} stroke="#a9745e" strokeWidth="2.7"/>
+ <path d="M73 120Q72 149 91 159M148 121Q147 146 130 158" fill="none" stroke="#fff3e6" strokeWidth="3" opacity=".28" strokeLinecap="round"/>
+ {girl?<g><path d="M55 103Q42 45 83 27Q119 6 151 34Q176 58 163 108Q157 71 147 64Q127 83 94 79Q68 103 55 103Z" fill={hair} stroke="#312a39" strokeWidth="3"/><path d="M70 56Q101 23 134 45M149 73Q163 105 157 157M58 105Q53 146 64 168" fill="none" stroke={hairLight} strokeWidth="5" opacity=".75" strokeLinecap="round"/><path d="M65 78Q83 79 96 64" fill="none" stroke={hairLight} strokeWidth="3" opacity=".5"/></g>:<g><path d="M58 104Q49 90 50 73Q45 52 64 43Q66 22 91 26Q107 12 127 28Q154 21 165 46Q179 66 157 103L151 72Q138 79 127 66Q105 82 91 68Q76 91 58 104Z" fill={hair} stroke="#242637" strokeWidth="3"/><path d="M59 72Q80 48 94 54M102 40Q122 51 136 42M145 52Q158 59 154 72" fill="none" stroke={hairLight} strokeWidth="5" strokeLinecap="round" opacity=".8"/></g>}
+ <path d="M77 97Q88 91 101 97M120 97Q134 91 145 97" fill="none" stroke={girl?'#684253':'#403749'} strokeWidth="4" strokeLinecap="round"/>
+ <g className="sofa-avatar-open-eyes">
+ <ellipse cx="91" cy="112" rx="10" ry="11" fill="#fffaf5"/>
+ <ellipse cx="132" cy="112" rx="10" ry="11" fill="#fffaf5"/>
+ <circle cx="93" cy="113" r="6" fill={girl?'#6f716d':'#53687b'}/>
+ <circle cx="130" cy="113" r="6" fill={girl?'#6f716d':'#53687b'}/>
+ <circle cx="94.5" cy="110.5" r="2.4" fill="white"/><circle cx="131.5" cy="110.5" r="2.4" fill="white"/>
+ <path d="M79 108Q89 100 102 108M120 108Q132 100 144 108" fill="none" stroke="#514052" strokeWidth="3.2" strokeLinecap="round"/>
+ {girl&&<path d="M80 107L75 102M142 107L147 102" fill="none" stroke="#514052" strokeWidth="2.5" strokeLinecap="round"/>}
+ </g>
+ <g className="sofa-avatar-shut-eyes" opacity="0">
+ <path d="M82 111Q91 119 101 111M122 111Q132 119 141 111" fill="none" stroke="#514052" strokeWidth="3.5" strokeLinecap="round"/>
+ </g>
+ <ellipse cx="76" cy="133" rx="13" ry="6" fill="#e89097" opacity=".45"/>
+ <ellipse cx="146" cy="133" rx="13" ry="6" fill="#e89097" opacity=".45"/>
+ <path d="M112 117L107 129Q110 134 117 130" fill="none" stroke="#c98c77" strokeWidth="2.5" strokeLinecap="round"/>
+ <g className="sofa-avatar-neutral-mouth"><path d="M99 144Q110 147 122 144" fill="none" stroke="#9f5c61" strokeWidth="3" strokeLinecap="round"/></g>
+ <g className="sofa-avatar-happy-mouth" opacity="0"><path d="M92 140Q110 165 130 140Q111 148 92 140Z" fill="#854452" stroke="#854452" strokeWidth="2.8" strokeLinejoin="round"/><path d="M100 144Q111 149 123 144" fill="none" stroke="#fffaf2" strokeWidth="3" strokeLinecap="round"/><path d="M103 156Q111 153 118 156" fill="none" stroke="#dc7f90" strokeWidth="2.5"/></g>
+ {girl&&<g><circle cx="60" cy="135" r="4" fill="#f6dd85" stroke="#b99151" strokeWidth="1.3"/><circle cx="160" cy="135" r="4" fill="#f6dd85" stroke="#b99151" strokeWidth="1.3"/></g>}
+ </g>
  </svg>
 }
 export default function Home(){
