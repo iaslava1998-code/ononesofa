@@ -339,3 +339,20 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 @keyframes sofa-room-light{from{opacity:.72}to{opacity:1}}
 @media(max-width:600px){.magic-gate.sofa-room-gate{padding:23px 10px 20px}.sofa-room-gate>h2{margin-bottom:10px!important}.sofa-room-window{border-width:5px}.sofa-room-picture{border-width:4px}.sofa-room-sofa{left:5%;right:5%;height:28%}}
 @media(prefers-reduced-motion:reduce){.sofa-room-lamp{animation:none}}
+
+/* Refined compact apartment selector: quiet edge shimmer, not a rotating glow. */
+.magic-gate.sofa-room-gate{width:min(100%,670px);padding:19px clamp(12px,2.6vw,23px) 16px;border-radius:23px;border:1px solid rgba(235,208,179,.27);box-shadow:0 15px 42px rgba(0,0,0,.45),0 0 22px rgba(218,158,125,.07),inset 0 1px rgba(255,255,255,.08)}
+.magic-gate.sofa-room-gate::before{display:block!important;content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:5;background:linear-gradient(115deg,transparent 5%,rgba(246,209,174,.09) 30%,rgba(255,227,182,.65) 49%,rgba(191,166,231,.35) 57%,transparent 85%);background-size:250% 100%;background-position:100% 0;animation:sofa-room-edge-glimmer 9s ease-in-out infinite;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;box-shadow:none}
+.sofa-room-gate>h2{font-size:clamp(21px,3vw,26px);padding:4px 17px;margin:0 auto 8px!important;background:rgba(20,19,31,.62);border-color:rgba(255,225,186,.11)}
+.sofa-room-gate .sofa-character-options{margin-top:0;gap:clamp(4px,1.5vw,13px)}
+.sofa-room-gate .sofa-character-image{max-height:260px}
+.sofa-room-gate .sofa-character-button:is(:hover,:focus-visible){transform:translateY(-5px) scale(1.025)}
+.sofa-room-set{opacity:.76}
+.sofa-room-picture{opacity:.48}
+.sofa-room-shelf{opacity:.43}
+.sofa-room-curtain{opacity:.48}
+.sofa-room-lamp{opacity:.4;animation:none}
+.sofa-room-sofa{height:27%;opacity:.46}
+@keyframes sofa-room-edge-glimmer{0%,17%{background-position:100% 0;opacity:.3}48%{opacity:.9}75%,100%{background-position:-100% 0;opacity:.25}}
+@media(max-width:600px){.magic-gate.sofa-room-gate{width:min(100%,510px);padding:14px 9px 12px;border-radius:19px}.sofa-room-gate>h2{font-size:21px;padding:4px 14px;margin-bottom:7px!important}.sofa-room-gate .sofa-character-image{max-height:195px}.sofa-room-gate .sofa-character-options{gap:3px}}
+@media(prefers-reduced-motion:reduce){.magic-gate.sofa-room-gate::before{animation:none;opacity:.3}}
