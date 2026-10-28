@@ -35,3 +35,6 @@
 @keyframes catalog-appear{from{opacity:0;transform:translateY(28px);filter:blur(13px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
 @media(max-width:650px){.gate-main{min-height:calc(100svh - 150px)}.magic-gate{padding:32px 22px}.magic-runes{letter-spacing:.4em}.magic-wand{height:90px}}
 @media(prefers-reduced-motion:reduce){.magic-overlay,.magic-gate::before,.gate-orbit,.magic-stars span,.magic-ring,.magic-runes,.magic-wand,.catalog-reveal{animation:none!important}.magic-overlay{display:none}}
+
+/* Let profile portraits rise beyond the identity gate without clipping. */
+.magic-gate:has(.sofa-identity-options){overflow:visible}
