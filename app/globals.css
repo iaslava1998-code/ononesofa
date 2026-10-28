@@ -275,3 +275,12 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 @keyframes sofa-portrait-float{0%,100%{translate:0 0}50%{translate:0 -5px}}
 @media(max-width:460px){.sofa-identity-options{padding-top:150px}.sofa-avatar{width:min(140px,100%);height:154px}}
 @media(prefers-reduced-motion:reduce){.sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-avatar{animation:none}}
+
+/* Portrait blink: separate eyelids animate while portraits remain in place */
+.sofa-photo-blink{position:absolute;inset:0;pointer-events:none}
+.sofa-photo-blink i{position:absolute;top:40%;width:17%;height:9%;border-radius:52% 52% 55% 55%;opacity:0;transform:scaleY(.05);transform-origin:50% 35%;background:linear-gradient(180deg,#ab765e 0%,#e2aa88 56%,#d09270 95%);box-shadow:0 2px 1px #66473744}
+.sofa-photo-blink i:first-child{left:31%}.sofa-photo-blink i:last-child{left:53%}
+.sofa-photo-blink-veronika i{top:42%;width:16%;background:linear-gradient(180deg,#ad7860,#dca087 65%,#b57d67)}
+.sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-photo-blink i{animation:sofa-photo-eyelid 4s ease-in-out .7s infinite}
+@keyframes sofa-photo-eyelid{0%,33%,38%,68%,73%,100%{opacity:0;transform:scaleY(.05)}34%,37%,69%,72%{opacity:.97;transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-photo-blink i{animation:none}}
