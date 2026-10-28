@@ -8,46 +8,49 @@ import PosterImage from './PosterImage';
 const sharedRating=(f)=>{const scores=[f.slava,f.veronika].filter(v=>v!==null&&v!==undefined&&Number.isFinite(Number(v))).map(Number);return scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length*10)/10:null};
 const poster=(path)=>path?.startsWith('https://')?path:path?'https://image.tmdb.org/t/p/w500'+path:null;
 function SofaCharacter({girl=false}){
- const hair=girl?'#563347':'#292c40',hairLight=girl?'#86526e':'#50556d',shirt=girl?'#ce81aa':'#6a88b7';
+ const id=girl?'v':'s',hair=girl?'#55382f':'#49352b',shirt=girl?'#e8b6c8':'#8aadd9';
  return <svg className={'sofa-avatar-svg '+(girl?'sofa-avatar-girl':'sofa-avatar-boy')} viewBox="0 0 220 245" aria-hidden="true" focusable="false">
  <defs>
-  <linearGradient id={girl?'dressGirl':'dressBoy'} x1="0" x2="1" y1="0" y2="1"><stop stopColor={girl?'#f1b8ce':'#a6bce3'}/><stop offset="1" stopColor={shirt}/></linearGradient>
-  <linearGradient id={girl?'faceGirl':'faceBoy'} x1="0" x2=".75" y1=".2" y2="1"><stop stopColor="#ffdfc3"/><stop offset=".7" stopColor="#f4b991"/><stop offset="1" stopColor="#e5a27f"/></linearGradient>
+  <radialGradient id={id+'skin'} cx="38%" cy="29%" r="81%"><stop stopColor="#ffe9d2"/><stop offset=".61" stopColor="#f4c29f"/><stop offset="1" stopColor="#d99674"/></radialGradient>
+  <linearGradient id={id+'hair'} x1="0" y1="0" x2="1" y2="1"><stop stopColor={girl?'#9b6d55':'#7d5a46'}/><stop offset=".43" stopColor={hair}/><stop offset="1" stopColor="#281e20"/></linearGradient>
+  <linearGradient id={id+'shirt'} x1="0" x2=".7" y1="0" y2="1"><stop stopColor={girl?'#f7dbe6':'#cfdef6'}/><stop offset="1" stopColor={shirt}/></linearGradient>
+  <radialGradient id={id+'cheek'}><stop stopColor="#e68081" stopOpacity=".42"/><stop offset="1" stopColor="#e68081" stopOpacity="0"/></radialGradient>
+  <filter id={id+'soft'} x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
  </defs>
- <ellipse cx="110" cy="237" rx="75" ry="6" fill="#151422" opacity=".18"/>
+ <ellipse cx="110" cy="235" rx="70" ry="6" fill="#18131a" opacity=".2"/>
  <g className="sofa-avatar-body">
- <path d="M36 245Q34 187 75 172L145 172Q188 188 185 245Z" fill={girl?'url(#dressGirl)':'url(#dressBoy)'} stroke="#363447" strokeWidth="3"/>
- <path d="M70 180Q53 191 51 225M149 180Q167 191 170 225" fill="none" stroke="#ffffff" opacity=".24" strokeWidth="4"/>
- <path d="M87 174L109 194L132 174" fill="none" stroke={girl?'#fff1f4':'#dfedff'} strokeWidth="6" strokeLinecap="round"/>
- {girl&&<path d="M99 192Q110 202 121 192M110 196V244" fill="none" stroke="#a75b84" strokeWidth="2.5"/>}
+ <path d="M26 245Q24 195 65 177Q84 167 110 167Q139 166 156 177Q197 193 195 245Z" fill={'url(#'+id+'shirt)'} />
+ <path d="M31 233Q37 192 67 186" fill="none" stroke="#fff" opacity=".42" strokeWidth="7" strokeLinecap="round"/>
+ <path d="M157 186Q184 200 188 234" fill="none" stroke="#634a5b" opacity=".12" strokeWidth="8" strokeLinecap="round"/>
+ <path d="M88 174Q110 201 132 174" fill="none" stroke={girl?'#f5f1ec':'#f7faff'} strokeWidth="9" strokeLinecap="round"/>
+ {girl?<path d="M110 195V245" stroke="#b98ba0" strokeWidth="2" opacity=".5"/>:<path d="M92 180L110 194L128 180" fill="none" stroke="#567ea7" strokeWidth="2" opacity=".6"/>}
  </g>
  <g className="sofa-avatar-head">
- {girl&&<path d="M52 112Q34 51 72 25Q107 4 146 26Q185 51 166 130L171 193Q151 206 137 176L75 177Q52 204 46 180Z" fill={hair} stroke="#312a39" strokeWidth="3"/>}
- <path d="M97 151H124V181Q110 195 96 181Z" fill="#eaa987" stroke="#aa735e" strokeWidth="2.5"/>
- <ellipse cx="65" cy="115" rx="11" ry="16" fill="#f1b392" stroke="#a9765d" strokeWidth="2.5"/>
- <ellipse cx="155" cy="115" rx="11" ry="16" fill="#f1b392" stroke="#a9765d" strokeWidth="2.5"/>
- <path d="M62 88Q63 37 111 35Q158 36 159 89L157 123Q149 166 111 170Q71 166 63 123Z" fill={girl?'url(#faceGirl)':'url(#faceBoy)'} stroke="#a9745e" strokeWidth="2.7"/>
- <path d="M73 120Q72 149 91 159M148 121Q147 146 130 158" fill="none" stroke="#fff3e6" strokeWidth="3" opacity=".28" strokeLinecap="round"/>
- {girl?<g><path d="M55 103Q42 45 83 27Q119 6 151 34Q176 58 163 108Q157 71 147 64Q127 83 94 79Q68 103 55 103Z" fill={hair} stroke="#312a39" strokeWidth="3"/><path d="M70 56Q101 23 134 45M149 73Q163 105 157 157M58 105Q53 146 64 168" fill="none" stroke={hairLight} strokeWidth="5" opacity=".75" strokeLinecap="round"/><path d="M65 78Q83 79 96 64" fill="none" stroke={hairLight} strokeWidth="3" opacity=".5"/></g>:<g><path d="M58 104Q49 90 50 73Q45 52 64 43Q66 22 91 26Q107 12 127 28Q154 21 165 46Q179 66 157 103L151 72Q138 79 127 66Q105 82 91 68Q76 91 58 104Z" fill={hair} stroke="#242637" strokeWidth="3"/><path d="M59 72Q80 48 94 54M102 40Q122 51 136 42M145 52Q158 59 154 72" fill="none" stroke={hairLight} strokeWidth="5" strokeLinecap="round" opacity=".8"/></g>}
- <path d="M77 97Q88 91 101 97M120 97Q134 91 145 97" fill="none" stroke={girl?'#684253':'#403749'} strokeWidth="4" strokeLinecap="round"/>
+ {girl&&<path d="M46 108Q33 54 66 31Q88 12 120 16Q167 17 175 70Q182 113 174 176Q168 199 147 190L145 125L68 125L68 183Q47 196 43 172Z" fill={'url(#'+id+'hair)'}/>}
+ <path d="M98 155H124V186Q110 195 97 183Z" fill="#e8ad8e"/>
+ <ellipse cx="60" cy="111" rx="11" ry="16" fill="#e9ab89"/>
+ <ellipse cx="161" cy="111" rx="11" ry="16" fill="#df9d7d"/>
+ <ellipse cx="110" cy="103" rx="55" ry="70" fill={'url(#'+id+'skin)'}/>
+ <ellipse cx="78" cy="119" rx="23" ry="14" fill={'url(#'+id+'cheek)'}/>
+ <ellipse cx="143" cy="119" rx="23" ry="14" fill={'url(#'+id+'cheek)'}/>
+ <path d="M63 96Q66 60 88 50" stroke="#fff" strokeOpacity=".23" strokeWidth="9" fill="none" strokeLinecap="round" filter={'url(#'+id+'soft)'}/>
+ {girl?<g><path d="M53 103Q40 46 76 28Q104 8 139 24Q173 35 169 96Q159 73 149 61Q126 77 100 68Q77 88 53 103Z" fill={'url(#'+id+'hair)'}/><path d="M70 49Q97 27 132 36" fill="none" stroke="#b88e70" strokeWidth="7" opacity=".4" strokeLinecap="round"/><path d="M158 75Q174 130 160 183" fill="none" stroke="#2e2024" strokeWidth="10" strokeLinecap="round" opacity=".65"/></g>:<g><path d="M56 95Q46 66 60 49Q60 27 88 27Q103 14 124 27Q147 19 158 38Q176 54 161 93Q155 66 146 64Q124 71 113 59Q91 78 73 70Q64 89 56 95Z" fill={'url(#'+id+'hair)'}/><path d="M63 59Q77 42 94 44M110 35Q133 41 149 49" fill="none" stroke="#b48a6f" strokeWidth="5" opacity=".5" strokeLinecap="round"/></g>}
+ <path d="M73 91Q87 84 100 90M122 90Q136 84 148 91" fill="none" stroke={hair} strokeWidth="5" strokeLinecap="round"/>
  <g className="sofa-avatar-open-eyes">
- <ellipse cx="91" cy="112" rx="10" ry="11" fill="#fffaf5"/>
- <ellipse cx="132" cy="112" rx="10" ry="11" fill="#fffaf5"/>
- <circle cx="93" cy="113" r="6" fill={girl?'#6f716d':'#53687b'}/>
- <circle cx="130" cy="113" r="6" fill={girl?'#6f716d':'#53687b'}/>
- <circle cx="94.5" cy="110.5" r="2.4" fill="white"/><circle cx="131.5" cy="110.5" r="2.4" fill="white"/>
- <path d="M79 108Q89 100 102 108M120 108Q132 100 144 108" fill="none" stroke="#514052" strokeWidth="3.2" strokeLinecap="round"/>
- {girl&&<path d="M80 107L75 102M142 107L147 102" fill="none" stroke="#514052" strokeWidth="2.5" strokeLinecap="round"/>}
+ <ellipse cx="88" cy="108" rx="13" ry="14" fill="#fffaf6"/>
+ <ellipse cx="134" cy="108" rx="13" ry="14" fill="#fffaf6"/>
+ <circle cx="90" cy="109" r="8" fill={girl?'#745d43':'#516d77'}/>
+ <circle cx="132" cy="109" r="8" fill={girl?'#745d43':'#516d77'}/>
+ <circle cx="91" cy="109" r="4.4" fill="#26222a"/><circle cx="133" cy="109" r="4.4" fill="#26222a"/>
+ <circle cx="94" cy="105" r="3" fill="white"/><circle cx="136" cy="105" r="3" fill="white"/>
+ <path d="M76 104Q87 94 101 104M121 104Q133 94 147 104" stroke={hair} strokeWidth="3" strokeLinecap="round" fill="none"/>
+ {girl&&<path d="M77 102L72 98M146 102L151 98" stroke={hair} strokeWidth="2.5" strokeLinecap="round"/>}
  </g>
- <g className="sofa-avatar-shut-eyes" opacity="0">
- <path d="M82 111Q91 119 101 111M122 111Q132 119 141 111" fill="none" stroke="#514052" strokeWidth="3.5" strokeLinecap="round"/>
- </g>
- <ellipse cx="76" cy="133" rx="13" ry="6" fill="#e89097" opacity=".45"/>
- <ellipse cx="146" cy="133" rx="13" ry="6" fill="#e89097" opacity=".45"/>
- <path d="M112 117L107 129Q110 134 117 130" fill="none" stroke="#c98c77" strokeWidth="2.5" strokeLinecap="round"/>
- <g className="sofa-avatar-neutral-mouth"><path d="M99 144Q110 147 122 144" fill="none" stroke="#9f5c61" strokeWidth="3" strokeLinecap="round"/></g>
- <g className="sofa-avatar-happy-mouth" opacity="0"><path d="M92 140Q110 165 130 140Q111 148 92 140Z" fill="#854452" stroke="#854452" strokeWidth="2.8" strokeLinejoin="round"/><path d="M100 144Q111 149 123 144" fill="none" stroke="#fffaf2" strokeWidth="3" strokeLinecap="round"/><path d="M103 156Q111 153 118 156" fill="none" stroke="#dc7f90" strokeWidth="2.5"/></g>
- {girl&&<g><circle cx="60" cy="135" r="4" fill="#f6dd85" stroke="#b99151" strokeWidth="1.3"/><circle cx="160" cy="135" r="4" fill="#f6dd85" stroke="#b99151" strokeWidth="1.3"/></g>}
+ <g className="sofa-avatar-shut-eyes" opacity="0"><path d="M77 109Q88 120 101 109M121 109Q133 120 146 109" stroke={hair} strokeWidth="4" strokeLinecap="round" fill="none"/></g>
+ <path d="M110 108Q106 126 110 129Q113 131 118 127" stroke="#bd816d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity=".65"/>
+ <g className="sofa-avatar-neutral-mouth"><path d="M97 144Q110 148 123 144" stroke="#a96567" strokeWidth="3.5" strokeLinecap="round" fill="none"/></g>
+ <g className="sofa-avatar-happy-mouth" opacity="0"><path d="M91 138Q111 169 131 138Q111 151 91 138Z" fill="#8d4c54"/><path d="M97 142Q110 151 125 142" stroke="#fff9f5" strokeWidth="5" strokeLinecap="round" fill="none"/><path d="M103 155Q111 151 119 155" stroke="#da8a95" strokeWidth="3" fill="none"/></g>
+ {girl&&<g><circle cx="57" cy="136" r="4" fill="#f5d89c"/><circle cx="164" cy="136" r="4" fill="#f5d89c"/></g>}
  </g>
  </svg>
 }
