@@ -356,3 +356,20 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 @keyframes sofa-room-edge-glimmer{0%,17%{background-position:100% 0;opacity:.3}48%{opacity:.9}75%,100%{background-position:-100% 0;opacity:.25}}
 @media(max-width:600px){.magic-gate.sofa-room-gate{width:min(100%,510px);padding:14px 9px 12px;border-radius:19px}.sofa-room-gate>h2{font-size:21px;padding:4px 14px;margin-bottom:7px!important}.sofa-room-gate .sofa-character-image{max-height:195px}.sofa-room-gate .sofa-character-options{gap:3px}}
 @media(prefers-reduced-motion:reduce){.magic-gate.sofa-room-gate::before{animation:none;opacity:.3}}
+
+/* Final selection scene: cinematic art direction, no diagram-like furniture. */
+.magic-gate.sofa-room-gate{width:min(100%,650px);padding:22px clamp(14px,3vw,30px) 24px;overflow:hidden!important;border-radius:26px;background:#181827;border:1px solid rgba(245,215,192,.23);box-shadow:0 20px 62px rgba(0,0,0,.52),inset 0 1px rgba(255,255,255,.1)}
+.sofa-room-gate .sofa-room-set{position:absolute;inset:0;z-index:0;opacity:1;pointer-events:none;background:radial-gradient(ellipse 80% 65% at 83% 14%,rgba(228,162,120,.28),transparent 72%),radial-gradient(ellipse 80% 68% at 10% 55%,rgba(88,95,151,.37),transparent 75%),radial-gradient(ellipse 80% 40% at 52% 108%,rgba(169,114,124,.18),transparent 75%),linear-gradient(145deg,#303047 0%,#242437 45%,#191724 100%)}
+.sofa-room-gate .sofa-room-set::before{content:"";position:absolute;inset:0;height:auto;box-shadow:none;background:linear-gradient(110deg,transparent 20%,rgba(255,235,201,.045) 48%,transparent 70%);opacity:.6;transform:rotate(-7deg)}
+.sofa-room-gate .sofa-room-set::after{content:"";position:absolute;inset:0;opacity:.15;background:radial-gradient(circle,rgba(255,248,229,.38) .5px,transparent .8px);background-size:7px 7px;mix-blend-mode:soft-light}
+.sofa-room-gate>h2{position:relative;z-index:2;font-size:clamp(22px,3.2vw,27px);font-weight:750;letter-spacing:-.035em;padding:0;margin:2px auto 10px!important;background:none;border:0;box-shadow:none;backdrop-filter:none;text-shadow:0 2px 18px #080815}
+.sofa-room-gate .sofa-character-options{position:relative;z-index:2;gap:clamp(6px,2vw,20px);margin:0;align-items:end}
+.sofa-room-gate .sofa-character-button{position:relative;min-width:0;border-radius:16px;padding:6px 3px 3px;transform-origin:center bottom}
+.sofa-room-gate .sofa-character-button:is(:hover,:focus-visible){transform:translateY(-5px) scale(1.02);filter:brightness(1.06)}
+.sofa-character-art{position:relative;display:block;width:100%;aspect-ratio:1.1/1;max-height:300px}
+.sofa-character-still,.sofa-character-art .sofa-character-image{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;max-height:none;transition:opacity .08s linear;filter:drop-shadow(0 13px 12px rgba(3,3,12,.35))}
+.sofa-character-still{z-index:2;pointer-events:none}
+.sofa-character-art .sofa-character-image{z-index:1}
+.magic-gate.sofa-room-gate::before{opacity:.46;animation:sofa-room-edge-glimmer 12s ease-in-out infinite}
+@media(max-width:600px){.magic-gate.sofa-room-gate{padding:17px 9px 16px;border-radius:20px}.sofa-character-art{aspect-ratio:1/1;max-height:210px}.sofa-room-gate>h2{margin:0 auto 7px!important}}
+@media(prefers-reduced-motion:reduce){.sofa-room-gate .sofa-character-button{transition:none}.sofa-character-still,.sofa-character-art .sofa-character-image{transition:none}}
