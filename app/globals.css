@@ -284,3 +284,10 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 .sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-photo-blink i{animation:sofa-photo-eyelid 4s ease-in-out .7s infinite}
 @keyframes sofa-photo-eyelid{0%,33%,38%,68%,73%,100%{opacity:0;transform:scaleY(.05)}34%,37%,69%,72%{opacity:.97;transform:scaleY(1)}}
 @media(prefers-reduced-motion:reduce){.sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-photo-blink i{animation:none}}
+
+/* High resolution portrait animations: preserve the full cutout and let the WebP handle motion. */
+.sofa-identity-options{padding-top:200px}
+.sofa-avatar{width:min(230px,115%);height:205px;bottom:calc(100% - 2px);overflow:visible;border-radius:0;mask-image:none;-webkit-mask-image:none;filter:drop-shadow(0 10px 14px rgba(0,0,0,.22))}
+.sofa-photo-avatar{width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.sofa-identity-choice:is(:hover,:focus-visible,:active) .sofa-avatar{animation:none}
+@media(max-width:460px){.sofa-identity-options{padding-top:150px}.sofa-avatar{width:min(158px,110%);height:155px}}
