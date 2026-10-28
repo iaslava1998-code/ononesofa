@@ -7,53 +7,6 @@ import Premieres from './Premieres';
 import PosterImage from './PosterImage';
 const sharedRating=(f)=>{const scores=[f.slava,f.veronika].filter(v=>v!==null&&v!==undefined&&Number.isFinite(Number(v))).map(Number);return scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length*10)/10:null};
 const poster=(path)=>path?.startsWith('https://')?path:path?'https://image.tmdb.org/t/p/w500'+path:null;
-function SofaCharacter({girl=false}){
- const id=girl?'v':'s',hair=girl?'#55382f':'#49352b',shirt=girl?'#e8b6c8':'#8aadd9';
- return <svg className={'sofa-avatar-svg '+(girl?'sofa-avatar-girl':'sofa-avatar-boy')} viewBox="0 0 220 245" aria-hidden="true" focusable="false">
- <defs>
-  <radialGradient id={id+'skin'} cx="38%" cy="29%" r="81%"><stop stopColor="#ffe9d2"/><stop offset=".61" stopColor="#f4c29f"/><stop offset="1" stopColor="#d99674"/></radialGradient>
-  <linearGradient id={id+'hair'} x1="0" y1="0" x2="1" y2="1"><stop stopColor={girl?'#9b6d55':'#7d5a46'}/><stop offset=".43" stopColor={hair}/><stop offset="1" stopColor="#281e20"/></linearGradient>
-  <linearGradient id={id+'shirt'} x1="0" x2=".7" y1="0" y2="1"><stop stopColor={girl?'#f7dbe6':'#cfdef6'}/><stop offset="1" stopColor={shirt}/></linearGradient>
-  <radialGradient id={id+'cheek'}><stop stopColor="#e68081" stopOpacity=".42"/><stop offset="1" stopColor="#e68081" stopOpacity="0"/></radialGradient>
-  <filter id={id+'soft'} x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
- </defs>
- <ellipse cx="110" cy="235" rx="70" ry="6" fill="#18131a" opacity=".2"/>
- <g className="sofa-avatar-body">
- <path d="M26 245Q24 195 65 177Q84 167 110 167Q139 166 156 177Q197 193 195 245Z" fill={'url(#'+id+'shirt)'} />
- <path d="M31 233Q37 192 67 186" fill="none" stroke="#fff" opacity=".42" strokeWidth="7" strokeLinecap="round"/>
- <path d="M157 186Q184 200 188 234" fill="none" stroke="#634a5b" opacity=".12" strokeWidth="8" strokeLinecap="round"/>
- <path d="M88 174Q110 201 132 174" fill="none" stroke={girl?'#f5f1ec':'#f7faff'} strokeWidth="9" strokeLinecap="round"/>
- {girl?<path d="M110 195V245" stroke="#b98ba0" strokeWidth="2" opacity=".5"/>:<path d="M92 180L110 194L128 180" fill="none" stroke="#567ea7" strokeWidth="2" opacity=".6"/>}
- </g>
- <g className="sofa-avatar-head">
- {girl&&<path d="M46 108Q33 54 66 31Q88 12 120 16Q167 17 175 70Q182 113 174 176Q168 199 147 190L145 125L68 125L68 183Q47 196 43 172Z" fill={'url(#'+id+'hair)'}/>}
- <path d="M98 155H124V186Q110 195 97 183Z" fill="#e8ad8e"/>
- <ellipse cx="60" cy="111" rx="11" ry="16" fill="#e9ab89"/>
- <ellipse cx="161" cy="111" rx="11" ry="16" fill="#df9d7d"/>
- <ellipse cx="110" cy="103" rx="55" ry="70" fill={'url(#'+id+'skin)'}/>
- <ellipse cx="78" cy="119" rx="23" ry="14" fill={'url(#'+id+'cheek)'}/>
- <ellipse cx="143" cy="119" rx="23" ry="14" fill={'url(#'+id+'cheek)'}/>
- <path d="M63 96Q66 60 88 50" stroke="#fff" strokeOpacity=".23" strokeWidth="9" fill="none" strokeLinecap="round" filter={'url(#'+id+'soft)'}/>
- {girl?<g><path d="M53 103Q40 46 76 28Q104 8 139 24Q173 35 169 96Q159 73 149 61Q126 77 100 68Q77 88 53 103Z" fill={'url(#'+id+'hair)'}/><path d="M70 49Q97 27 132 36" fill="none" stroke="#b88e70" strokeWidth="7" opacity=".4" strokeLinecap="round"/><path d="M158 75Q174 130 160 183" fill="none" stroke="#2e2024" strokeWidth="10" strokeLinecap="round" opacity=".65"/></g>:<g><path d="M56 95Q46 66 60 49Q60 27 88 27Q103 14 124 27Q147 19 158 38Q176 54 161 93Q155 66 146 64Q124 71 113 59Q91 78 73 70Q64 89 56 95Z" fill={'url(#'+id+'hair)'}/><path d="M63 59Q77 42 94 44M110 35Q133 41 149 49" fill="none" stroke="#b48a6f" strokeWidth="5" opacity=".5" strokeLinecap="round"/></g>}
- <path d="M73 91Q87 84 100 90M122 90Q136 84 148 91" fill="none" stroke={hair} strokeWidth="5" strokeLinecap="round"/>
- <g className="sofa-avatar-open-eyes">
- <ellipse cx="88" cy="108" rx="13" ry="14" fill="#fffaf6"/>
- <ellipse cx="134" cy="108" rx="13" ry="14" fill="#fffaf6"/>
- <circle cx="90" cy="109" r="8" fill={girl?'#745d43':'#516d77'}/>
- <circle cx="132" cy="109" r="8" fill={girl?'#745d43':'#516d77'}/>
- <circle cx="91" cy="109" r="4.4" fill="#26222a"/><circle cx="133" cy="109" r="4.4" fill="#26222a"/>
- <circle cx="94" cy="105" r="3" fill="white"/><circle cx="136" cy="105" r="3" fill="white"/>
- <path d="M76 104Q87 94 101 104M121 104Q133 94 147 104" stroke={hair} strokeWidth="3" strokeLinecap="round" fill="none"/>
- {girl&&<path d="M77 102L72 98M146 102L151 98" stroke={hair} strokeWidth="2.5" strokeLinecap="round"/>}
- </g>
- <g className="sofa-avatar-shut-eyes" opacity="0"><path d="M77 109Q88 120 101 109M121 109Q133 120 146 109" stroke={hair} strokeWidth="4" strokeLinecap="round" fill="none"/></g>
- <path d="M110 108Q106 126 110 129Q113 131 118 127" stroke="#bd816d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity=".65"/>
- <g className="sofa-avatar-neutral-mouth"><path d="M97 144Q110 148 123 144" stroke="#a96567" strokeWidth="3.5" strokeLinecap="round" fill="none"/></g>
- <g className="sofa-avatar-happy-mouth" opacity="0"><path d="M91 138Q111 169 131 138Q111 151 91 138Z" fill="#8d4c54"/><path d="M97 142Q110 151 125 142" stroke="#fff9f5" strokeWidth="5" strokeLinecap="round" fill="none"/><path d="M103 155Q111 151 119 155" stroke="#da8a95" strokeWidth="3" fill="none"/></g>
- {girl&&<g><circle cx="57" cy="136" r="4" fill="#f5d89c"/><circle cx="164" cy="136" r="4" fill="#f5d89c"/></g>}
- </g>
- </svg>
-}
 export default function Home(){
  const [films,setFilms]=useState([]),[tab,setTab]=useState('want'),[q,setQ]=useState(''),[selected,setSelected]=useState(null),[pin,setPin]=useState(''),[unlocked,setUnlocked]=useState(false),[status,setStatus]=useState(''),[add,setAdd]=useState(false),[found,setFound]=useState([]);
  const [identity,setIdentity]=useState('');
@@ -166,7 +119,7 @@ export default function Home(){
   }catch{setStatus('Нет связи с сервером. Попробуй ещё раз.')}
  }
 
- return <><div className="cinema-wallpaper" aria-hidden="true"/><div className="season-atmosphere" aria-hidden="true"><div className="season-light"/>{Array.from({length:35},(_,i)=><span key={i} style={{'--i':i,'--x':((i*47+13)%101)+'%','--d':(i%11)+'s','--s':(.6+(i%5)*.17)}}/>)}</div><header><div className="eyebrow">Кино для двоих</div><h1>На одном диване</h1><p className="subtitle">Смотрим, спорим, оцениваем. Только наш список.</p></header>{!checkingSession&&!unlocked&&<main className="gate-main"><form className="magic-gate" onSubmit={e=>{e.preventDefault();login()}}><div className="gate-orbit" aria-hidden="true">✦</div><p className="gate-eyebrow">Тайный киноклуб для двоих</p><h2>Открой нашу историю</h2><p className="gate-description">Только один секретный код отделяет тебя от нашего кинотеатра.</p><label htmlFor="access-pin" className="gate-label">Секретный код</label><input id="access-pin" type="password" autoComplete="off" inputMode="numeric" maxLength={12} value={pin} onChange={e=>setPin(e.target.value)} placeholder="Введи PIN" required/><button type="submit" className="gate-enter" disabled={loggingIn}>{loggingIn?'Проверяем заклинание…':'Открыть кинотеатр ✦'}</button>{status&&<p className="gate-error" role="alert">{status}</p>}</form></main>}{checkingSession&&<main className="gate-loading" aria-label="Проверяем вход"><span>✦</span></main>}{unlocked&&revealed&&!identity&&<main className="gate-main"><div className="magic-gate"><h2>Кто ты?</h2><div className="sofa-identity-options"><button type="button" className="gate-enter sofa-identity-choice" onClick={()=>chooseIdentity('Слава')}><span className="sofa-avatar"><SofaCharacter /></span><span className="sofa-identity-name">Слава</span></button><button type="button" className="gate-enter sofa-identity-choice" onClick={()=>chooseIdentity('Вероника')}><span className="sofa-avatar"><SofaCharacter girl /></span><span className="sofa-identity-name">Вероника</span></button></div></div></main>}{unlocked&&revealed&&identity&&<main className="catalog-reveal">
+ return <><div className="cinema-wallpaper" aria-hidden="true"/><div className="season-atmosphere" aria-hidden="true"><div className="season-light"/>{Array.from({length:35},(_,i)=><span key={i} style={{'--i':i,'--x':((i*47+13)%101)+'%','--d':(i%11)+'s','--s':(.6+(i%5)*.17)}}/>)}</div><header><div className="eyebrow">Кино для двоих</div><h1>На одном диване</h1><p className="subtitle">Смотрим, спорим, оцениваем. Только наш список.</p></header>{!checkingSession&&!unlocked&&<main className="gate-main"><form className="magic-gate" onSubmit={e=>{e.preventDefault();login()}}><div className="gate-orbit" aria-hidden="true">✦</div><p className="gate-eyebrow">Тайный киноклуб для двоих</p><h2>Открой нашу историю</h2><p className="gate-description">Только один секретный код отделяет тебя от нашего кинотеатра.</p><label htmlFor="access-pin" className="gate-label">Секретный код</label><input id="access-pin" type="password" autoComplete="off" inputMode="numeric" maxLength={12} value={pin} onChange={e=>setPin(e.target.value)} placeholder="Введи PIN" required/><button type="submit" className="gate-enter" disabled={loggingIn}>{loggingIn?'Проверяем заклинание…':'Открыть кинотеатр ✦'}</button>{status&&<p className="gate-error" role="alert">{status}</p>}</form></main>}{checkingSession&&<main className="gate-loading" aria-label="Проверяем вход"><span>✦</span></main>}{unlocked&&revealed&&!identity&&<main className="gate-main"><div className="magic-gate"><h2>Кто ты?</h2><div className="sofa-identity-options"><button type="button" className="gate-enter sofa-identity-choice" onClick={()=>chooseIdentity('Слава')}><span className="sofa-avatar"><img className="sofa-photo-avatar" src="/profile-slava.svg" alt="" /></span><span className="sofa-identity-name">Слава</span></button><button type="button" className="gate-enter sofa-identity-choice" onClick={()=>chooseIdentity('Вероника')}><span className="sofa-avatar"><img className="sofa-photo-avatar" src="/profile-veronika.svg" alt="" /></span><span className="sofa-identity-name">Вероника</span></button></div></div></main>}{unlocked&&revealed&&identity&&<main className="catalog-reveal">
  <Premieres films={films} onAdd={f=>addFilm(f,'films')}/><div className="catalog-switch" role="group" aria-label="Тип каталога"><button className={kind==='films'?'current':''} onClick={()=>{changeKind('films')}}>Фильмы</button><button className={kind==='series'?'current':''} onClick={()=>{changeKind('series')}}>Сериалы</button></div><nav className="bar main-toolbar" aria-label="Навигация по каталогу"><div className="film-tabs"><button className={'pill '+(tab==='want'?'active':'')} aria-pressed={tab==='want'} onClick={()=>setTab('want')}>Хочу посмотреть <span className="tab-count">{counts.want}</span></button><button className={'pill '+(tab==='seen'?'active':'')} aria-pressed={tab==='seen'} onClick={()=>setTab('seen')}>Посмотрели <span className="tab-count">{counts.seen}</span></button></div><div className="film-search"><input className="search" aria-label="Поиск по фильмам" placeholder={kind==='series'?'Поиск сериала по названию…':'Поиск фильма по названию…'} value={q} onChange={e=>setQ(e.target.value)}/>{q&&<button className="search-clear" aria-label="Очистить поиск" title="Очистить поиск" onClick={()=>setQ('')}>×</button>}</div><button className="action primary add-film" onClick={openSearch}>{kind==='series'?'+ Добавить сериал':'+ Добавить фильм'}</button>{unlocked&&<a className="action chat-link" href="#chat">Чат ↓</a>}<button type="button" className="action" onClick={pickMovie}>🎲 Что посмотрим?</button><button type="button" className="action" onClick={logout}>Выйти</button></nav>
 
  {status&&<p className="notice">{status}</p>}
