@@ -236,3 +236,12 @@ header::after{animation:cinema-projector 12s ease-in-out infinite alternate}
 .sortable-film.drag-target{outline:2px dashed rgba(255,255,255,.85);outline-offset:4px;border-radius:9px}
 .sortable-film:focus-visible{outline:2px solid white;outline-offset:3px}
 @media(pointer:coarse){.sortable-film{touch-action:pan-y}}
+
+/* Shared PIN profile chooser and mutual presence */
+.sofa-identity-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.sofa-identity-options .gate-enter{width:100%;margin:0}
+.sofa-presence{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.sofa-presence-list{display:flex;gap:18px;flex-wrap:wrap}
+.sofa-presence-person{display:flex;flex-direction:column;gap:3px;min-width:100px}
+.sofa-presence-person small{color:var(--muted);font-size:12px}
+@media(max-width:600px){.sofa-presence-list{width:100%;justify-content:space-between;gap:10px}.sofa-presence-person{min-width:0}}
