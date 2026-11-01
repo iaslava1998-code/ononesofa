@@ -9,7 +9,7 @@ export async function GET(request){
  if(!client)return NextResponse.json({error:'Database unavailable'},{status:503});
  const {data,error}=await client.from('site_presence').select('name,last_seen');
  if(error)return NextResponse.json({error:'Presence unavailable'},{status:500});
- return NextResponse.json({people:data||[]},{headers:{'Cache-Control':'no-store'}});
+ return NextResponse.json({people:data||[],server_now:new Date().toISOString()},{headers:{'Cache-Control':'no-store'}});
 }
 export async function POST(request){
  if(!authenticated(request))return NextResponse.json({error:'Unauthorized'},{status:401});
